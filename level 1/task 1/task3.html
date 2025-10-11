@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3 - Navigation Menu</title>
+    <link rel="stylesheet" href="task3-styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h2>WebDev Portfolio</h2>
+            </div>
+            
+            <nav class="navigation">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">
+                            <span class="nav-icon">👤</span>
+                            <span class="nav-text">About</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">
+                            <span class="nav-icon">📧</span>
+                            <span class="nav-text">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <!-- Mobile menu button -->
+            <button class="mobile-menu-btn" aria-label="Toggle mobile menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <section id="home" class="content-section active">
+            <div class="content-container">
+                <h1>Welcome Home</h1>
+                <p>This is the home section. Navigate through the menu to explore different sections of the website.</p>
+            </div>
+        </section>
+        
+        <section id="about" class="content-section">
+            <div class="content-container">
+                <h1>About Us</h1>
+                <p>Learn more about our mission, vision, and the team behind this amazing project.</p>
+            </div>
+        </section>
+        
+        <section id="contact" class="content-section">
+            <div class="content-container">
+                <h1>Contact Information</h1>
+                <p>Get in touch with us through various channels. We'd love to hear from you!</p>
+            </div>
+        </section>
+    </main>
+    
+    <script>
+        // Simple navigation functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.content-section');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const navigation = document.querySelector('.navigation');
+            
+            // Navigation link click handler
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // Close mobile menu if open
+                    navigation.classList.remove('mobile-open');
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuBtn.addEventListener('click', function() {
+                navigation.classList.toggle('mobile-open');
+            });
+        });
+    </script>
+</body>
+</html>

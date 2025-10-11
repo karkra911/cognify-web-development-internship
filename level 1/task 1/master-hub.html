@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1 - Master Hub | All Web Development Projects</title>
+    <link rel="stylesheet" href="master-hub-styles.css">
+</head>
+<body>
+    <div class="master-container">
+        <!-- Header Section -->
+        <header class="master-header">
+            <div class="header-content">
+                <h1 class="master-title">🚀 Task 1 - Web Development Hub</h1>
+                <p class="master-subtitle">All HTML & CSS Projects in One Place</p>
+            </div>
+        </header>
+
+        <!-- Navigation Controls -->
+        <nav class="master-nav">
+            <div class="nav-container">
+                <h3 class="nav-title">Choose a Project:</h3>
+                <div class="nav-buttons">
+                    <button class="nav-btn active" data-page="main-index.html">
+                        <span class="btn-icon">🏠</span>
+                        <span class="btn-text">Portfolio Overview</span>
+                    </button>
+                    <button class="nav-btn" data-page="index.html">
+                        <span class="btn-icon">📄</span>
+                        <span class="btn-text">Original Simple Page</span>
+                    </button>
+                    <button class="nav-btn" data-page="task1.html">
+                        <span class="btn-icon">🖼️</span>
+                        <span class="btn-text">Photography Portfolio</span>
+                    </button>
+                    <button class="nav-btn" data-page="task2.html">
+                        <span class="btn-icon">📝</span>
+                        <span class="btn-text">Contact Form</span>
+                    </button>
+                    <button class="nav-btn" data-page="task3.html">
+                        <span class="btn-icon">🧭</span>
+                        <span class="btn-text">Navigation Menu</span>
+                    </button>
+                </div>
+                
+                <!-- Additional Controls -->
+                <div class="control-buttons">
+                    <button class="control-btn" id="fullscreenBtn">
+                        <span class="btn-icon">⛶</span>
+                        <span class="btn-text">Fullscreen</span>
+                    </button>
+                    <button class="control-btn" id="refreshBtn">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">Refresh</span>
+                    </button>
+                    <button class="control-btn" id="newTabBtn">
+                        <span class="btn-icon">🔗</span>
+                        <span class="btn-text">Open in New Tab</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="master-content">
+            <div class="iframe-container">
+                <div class="loading-spinner" id="loadingSpinner">
+                    <div class="spinner"></div>
+                    <p>Loading page...</p>
+                </div>
+                <iframe 
+                    id="contentFrame" 
+                    src="main-index.html" 
+                    title="Current Page Display"
+                    frameborder="0"
+                    sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
+                >
+                </iframe>
+            </div>
+            
+            <!-- Page Info Panel -->
+            <div class="info-panel">
+                <h4 class="info-title">Current Page: <span id="currentPageName">Portfolio Overview</span></h4>
+                <p class="info-description" id="pageDescription">
+                    Main portfolio overview showing all projects with navigation to individual tasks.
+                </p>
+                <div class="page-features" id="pageFeatures">
+                    <span class="feature-tag">Responsive</span>
+                    <span class="feature-tag">Modern Design</span>
+                    <span class="feature-tag">Interactive</span>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="master-footer">
+            <p>🎯 Task 1 Complete - All web development projects accessible from this master hub</p>
+            <p class="tech-stack">Built with: HTML5 • CSS3 • JavaScript • Responsive Design</p>
+        </footer>
+    </div>
+
+    <script>
+        // Master Hub JavaScript Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const navButtons = document.querySelectorAll('.nav-btn');
+            const contentFrame = document.getElementById('contentFrame');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const currentPageName = document.getElementById('currentPageName');
+            const pageDescription = document.getElementById('pageDescription');
+            const pageFeatures = document.getElementById('pageFeatures');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const newTabBtn = document.getElementById('newTabBtn');
+
+            // Page information data
+            const pageInfo = {
+                'main-index.html': {
+                    name: 'Portfolio Overview',
+                    description: 'Main portfolio overview showing all projects with navigation to individual tasks.',
+                    features: ['Responsive', 'Modern Design', 'Interactive']
+                },
+                'index.html': {
+                    name: 'Original Simple Page',
+                    description: 'The first simple webpage with heading, paragraph, and image using clean HTML and CSS.',
+                    features: ['HTML5', 'CSS3', 'Responsive']
+                },
+                'task1.html': {
+                    name: 'Photography Portfolio',
+                    description: 'An elegant photography portfolio webpage with gradient backgrounds and hover effects.',
+                    features: ['Visual Design', 'Hover Effects', 'Typography']
+                },
+                'task2.html': {
+                    name: 'Contact Form',
+                    description: 'Interactive contact form with email input, textarea, and modern form validation styling.',
+                    features: ['Forms', 'Validation', 'Animations']
+                },
+                'task3.html': {
+                    name: 'Navigation Menu',
+                    description: 'Dynamic navigation menu with three sections, mobile hamburger menu, and JavaScript functionality.',
+                    features: ['Navigation', 'JavaScript', 'Mobile-First']
+                }
+            };
+
+            let currentPage = 'main-index.html';
+
+            // Show loading spinner
+            function showLoading() {
+                loadingSpinner.style.display = 'flex';
+            }
+
+            // Hide loading spinner
+            function hideLoading() {
+                loadingSpinner.style.display = 'none';
+            }
+
+            // Update page info
+            function updatePageInfo(pageName) {
+                const info = pageInfo[pageName];
+                if (info) {
+                    currentPageName.textContent = info.name;
+                    pageDescription.textContent = info.description;
+                    
+                    // Update features
+                    pageFeatures.innerHTML = '';
+                    info.features.forEach(feature => {
+                        const tag = document.createElement('span');
+                        tag.className = 'feature-tag';
+                        tag.textContent = feature;
+                        pageFeatures.appendChild(tag);
+                    });
+                }
+            }
+
+            // Navigation button click handler
+            navButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const pageName = this.getAttribute('data-page');
+                    
+                    // Update active button
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show loading
+                    showLoading();
+                    
+                    // Load new page
+                    contentFrame.src = pageName;
+                    currentPage = pageName;
+                    
+                    // Update page info
+                    updatePageInfo(pageName);
+                    
+                    // Add loading delay for better UX
+                    setTimeout(hideLoading, 800);
+                });
+            });
+
+            // Control button handlers
+            fullscreenBtn.addEventListener('click', function() {
+                if (contentFrame.requestFullscreen) {
+                    contentFrame.requestFullscreen();
+                }
+            });
+
+            refreshBtn.addEventListener('click', function() {
+                showLoading();
+                contentFrame.src = contentFrame.src;
+                setTimeout(hideLoading, 500);
+            });
+
+            newTabBtn.addEventListener('click', function() {
+                window.open(currentPage, '_blank');
+            });
+
+            // Initial load
+            contentFrame.addEventListener('load', function() {
+                setTimeout(hideLoading, 300);
+            });
+
+            // Initialize
+            updatePageInfo(currentPage);
+            setTimeout(hideLoading, 1000);
+        });
+    </script>
+</body>
+</html>

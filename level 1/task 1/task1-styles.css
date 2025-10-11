@@ -1,0 +1,136 @@
+/* Task 1 - Simple Webpage Styles */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.7;
+    color: #2c3e50;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container styles */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding: 50px 40px;
+    backdrop-filter: blur(10px);
+}
+
+/* Heading styles */
+.main-heading {
+    color: #34495e;
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.main-heading::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    margin: 20px auto;
+    border-radius: 2px;
+}
+
+/* Paragraph styles */
+.intro-paragraph, .closing-paragraph {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    text-align: justify;
+    color: #555;
+    padding: 0 20px;
+}
+
+.closing-paragraph {
+    margin-top: 40px;
+    font-style: italic;
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    border-left: 5px solid #667eea;
+}
+
+/* Image container styles */
+.image-container {
+    text-align: center;
+    margin: 50px 0;
+    position: relative;
+}
+
+.main-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    filter: brightness(0.95);
+}
+
+.main-image:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    filter: brightness(1);
+}
+
+.image-caption {
+    margin-top: 20px;
+    font-style: italic;
+    color: #7f8c8d;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 30px 20px;
+    }
+    
+    .main-heading {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        letter-spacing: 1px;
+    }
+    
+    .intro-paragraph, .closing-paragraph {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+    
+    .closing-paragraph {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-heading {
+        font-size: 1.8rem;
+    }
+    
+    .container {
+        padding: 20px 15px;
+    }
+    
+    .intro-paragraph, .closing-paragraph {
+        font-size: 1rem;
+    }
+}
