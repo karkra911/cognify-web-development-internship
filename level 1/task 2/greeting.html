@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2.2 - Time-Based Greeting</title>
+    <link rel="stylesheet" href="greeting-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">⏰ Time-Based Greeting Alert</h1>
+            <p class="subtitle">Get personalized greetings based on the current time!</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="time-display">
+                <div class="current-time">
+                    <span class="time-label">Current Time:</span>
+                    <span id="currentTime" class="time-value"></span>
+                </div>
+                <div class="current-date">
+                    <span id="currentDate" class="date-value"></span>
+                </div>
+            </div>
+            
+            <div class="greeting-section">
+                <button id="greetingButton" class="greeting-btn">
+                    <span class="btn-text">Get My Greeting</span>
+                    <span class="btn-icon">💬</span>
+                </button>
+                
+                <div id="greetingDisplay" class="greeting-display">
+                    <div class="greeting-content">
+                        <span id="greetingEmoji" class="greeting-emoji">👋</span>
+                        <p id="greetingMessage" class="greeting-message">Click the button to get your personalized greeting!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-section">
+                <h3>🎯 Greeting Schedule:</h3>
+                <div class="schedule-grid">
+                    <div class="schedule-item">
+                        <span class="time-range">🌅 5:00 - 11:59</span>
+                        <span class="greeting-type">Good Morning!</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time-range">☀️ 12:00 - 16:59</span>
+                        <span class="greeting-type">Good Afternoon!</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time-range">🌆 17:00 - 20:59</span>
+                        <span class="greeting-type">Good Evening!</span>
+                    </div>
+                    <div class="schedule-item">
+                        <span class="time-range">🌙 21:00 - 4:59</span>
+                        <span class="greeting-type">Good Night!</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button id="alertButton" class="alert-btn">
+                    <span class="btn-text">Show Alert Box</span>
+                    <span class="btn-icon">⚠️</span>
+                </button>
+                <button id="autoGreetButton" class="auto-btn">
+                    <span class="btn-text">Auto Greeting</span>
+                    <span class="btn-icon">⚡</span>
+                </button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>🚀 Task 2.2 - JavaScript Time & Alert Functionality</p>
+        </footer>
+    </div>
+
+    <script>
+        // Time-based greeting functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const greetingButton = document.getElementById('greetingButton');
+            const alertButton = document.getElementById('alertButton');
+            const autoGreetButton = document.getElementById('autoGreetButton');
+            const currentTimeSpan = document.getElementById('currentTime');
+            const currentDateSpan = document.getElementById('currentDate');
+            const greetingDisplay = document.getElementById('greetingDisplay');
+            const greetingEmoji = document.getElementById('greetingEmoji');
+            const greetingMessage = document.getElementById('greetingMessage');
+            
+            let autoGreetingInterval;
+            let isAutoMode = false;
+            
+            // Update time and date every second
+            function updateDateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('en-US', { 
+                    hour12: true, 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+                const dateString = now.toLocaleDateString('en-US', { 
+                    weekday: 'long',
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                currentTimeSpan.textContent = timeString;
+                currentDateSpan.textContent = dateString;
+            }
+            
+            // Get greeting based on current time
+            function getTimeBasedGreeting() {
+                const now = new Date();
+                const hour = now.getHours();
+                const userName = 'Friend'; // Could be customized
+                
+                let greeting, emoji, timeOfDay;
+                
+                if (hour >= 5 && hour < 12) {
+                    greeting = `Good Morning, ${userName}!`;
+                    emoji = '🌅';
+                    timeOfDay = 'morning';
+                } else if (hour >= 12 && hour < 17) {
+                    greeting = `Good Afternoon, ${userName}!`;
+                    emoji = '☀️';
+                    timeOfDay = 'afternoon';
+                } else if (hour >= 17 && hour < 21) {
+                    greeting = `Good Evening, ${userName}!`;
+                    emoji = '🌆';
+                    timeOfDay = 'evening';
+                } else {
+                    greeting = `Good Night, ${userName}!`;
+                    emoji = '🌙';
+                    timeOfDay = 'night';
+                }
+                
+                const timeString = now.toLocaleTimeString('en-US', { 
+                    hour12: true, 
+                    hour: '2-digit', 
+                    minute: '2-digit'
+                });
+                
+                const fullMessage = `${greeting} It's ${timeString} - perfect time for a ${timeOfDay} greeting!`;
+                
+                return {
+                    greeting: fullMessage,
+                    emoji: emoji,
+                    timeOfDay: timeOfDay
+                };
+            }
+            
+            // Display greeting in the page
+            function displayGreeting() {
+                const greetingData = getTimeBasedGreeting();
+                
+                greetingEmoji.textContent = greetingData.emoji;
+                greetingMessage.textContent = greetingData.greeting;
+                greetingDisplay.classList.add('show');
+                
+                // Add animation class
+                greetingDisplay.style.animation = 'none';
+                setTimeout(() => {
+                    greetingDisplay.style.animation = 'slideInUp 0.5s ease-out';
+                }, 10);
+            }
+            
+            // Show alert box with greeting
+            function showGreetingAlert() {
+                const greetingData = getTimeBasedGreeting();
+                alert(`${greetingData.emoji} ${greetingData.greeting}`);
+            }
+            
+            // Toggle auto greeting mode
+            function toggleAutoGreeting() {
+                if (isAutoMode) {
+                    // Stop auto mode
+                    clearInterval(autoGreetingInterval);
+                    isAutoMode = false;
+                    autoGreetButton.querySelector('.btn-text').textContent = 'Auto Greeting';
+                    autoGreetButton.classList.remove('active');
+                } else {
+                    // Start auto mode
+                    displayGreeting(); // Show immediately
+                    autoGreetingInterval = setInterval(displayGreeting, 5000); // Update every 5 seconds
+                    isAutoMode = true;
+                    autoGreetButton.querySelector('.btn-text').textContent = 'Stop Auto';
+                    autoGreetButton.classList.add('active');
+                }
+            }
+            
+            // Event listeners
+            greetingButton.addEventListener('click', function() {
+                displayGreeting();
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            alertButton.addEventListener('click', function() {
+                showGreetingAlert();
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            autoGreetButton.addEventListener('click', function() {
+                toggleAutoGreeting();
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Initialize
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+            
+            // Show initial greeting after 2 seconds
+            setTimeout(displayGreeting, 2000);
+        });
+    </script>
+</body>
+</html>

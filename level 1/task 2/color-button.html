@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2.1 - Color Changing Button</title>
+    <link rel="stylesheet" href="color-button-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎨 Color Changing Button</h1>
+            <p class="subtitle">Click the button to see it change colors dynamically!</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="button-section">
+                <button id="colorButton" class="color-btn">
+                    <span class="btn-text">Click Me!</span>
+                    <span class="btn-icon">🌈</span>
+                </button>
+                
+                <div class="color-info">
+                    <p>Current Color: <span id="currentColor">Blue</span></p>
+                    <p>Click Count: <span id="clickCount">0</span></p>
+                </div>
+            </div>
+            
+            <div class="demo-section">
+                <h3>🎯 How it Works:</h3>
+                <ul class="feature-list">
+                    <li>✨ Cycles through multiple colors</li>
+                    <li>🔢 Tracks number of clicks</li>
+                    <li>🎭 Smooth color transitions</li>
+                    <li>📱 Responsive design</li>
+                </ul>
+            </div>
+            
+            <div class="reset-section">
+                <button id="resetButton" class="reset-btn">
+                    <span class="btn-text">Reset Colors</span>
+                    <span class="btn-icon">🔄</span>
+                </button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>🚀 Task 2.1 - JavaScript Color Manipulation</p>
+        </footer>
+    </div>
+
+    <script>
+        // Color changing button functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const colorButton = document.getElementById('colorButton');
+            const resetButton = document.getElementById('resetButton');
+            const currentColorSpan = document.getElementById('currentColor');
+            const clickCountSpan = document.getElementById('clickCount');
+            
+            // Array of colors to cycle through
+            const colors = [
+                { name: 'Blue', value: '#3498db', textColor: 'white' },
+                { name: 'Red', value: '#e74c3c', textColor: 'white' },
+                { name: 'Green', value: '#2ecc71', textColor: 'white' },
+                { name: 'Purple', value: '#9b59b6', textColor: 'white' },
+                { name: 'Orange', value: '#f39c12', textColor: 'white' },
+                { name: 'Teal', value: '#1abc9c', textColor: 'white' },
+                { name: 'Pink', value: '#e91e63', textColor: 'white' },
+                { name: 'Indigo', value: '#3f51b5', textColor: 'white' },
+                { name: 'Lime', value: '#8bc34a', textColor: 'black' },
+                { name: 'Coral', value: '#ff7043', textColor: 'white' }
+            ];
+            
+            let currentColorIndex = 0;
+            let clickCount = 0;
+            
+            // Initialize button with first color
+            updateButtonColor();
+            
+            // Color button click handler
+            colorButton.addEventListener('click', function() {
+                clickCount++;
+                currentColorIndex = (currentColorIndex + 1) % colors.length;
+                
+                updateButtonColor();
+                updateClickCount();
+                
+                // Add click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Reset button click handler
+            resetButton.addEventListener('click', function() {
+                currentColorIndex = 0;
+                clickCount = 0;
+                
+                updateButtonColor();
+                updateClickCount();
+                
+                // Add reset animation
+                colorButton.style.transform = 'rotate(360deg)';
+                setTimeout(() => {
+                    colorButton.style.transform = 'rotate(0deg)';
+                }, 500);
+            });
+            
+            // Update button color and text
+            function updateButtonColor() {
+                const color = colors[currentColorIndex];
+                colorButton.style.backgroundColor = color.value;
+                colorButton.style.color = color.textColor;
+                colorButton.style.borderColor = color.value;
+                currentColorSpan.textContent = color.name;
+                currentColorSpan.style.color = color.value;
+            }
+            
+            // Update click counter
+            function updateClickCount() {
+                clickCountSpan.textContent = clickCount;
+            }
+            
+            // Add hover effect
+            colorButton.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            
+            colorButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

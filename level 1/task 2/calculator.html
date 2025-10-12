@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2.3 - Basic Calculator</title>
+    <link rel="stylesheet" href="calculator-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🧮 Basic Calculator</h1>
+            <p class="subtitle">Add two numbers together and see the result instantly!</p>
+        </header>
+        
+        <main class="main-content">
+            <div class="calculator-section">
+                <div class="calculator-container">
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label for="number1" class="input-label">First Number:</label>
+                            <input 
+                                type="number" 
+                                id="number1" 
+                                class="number-input" 
+                                placeholder="Enter first number"
+                                step="any"
+                            >
+                        </div>
+                        
+                        <div class="operator-display">
+                            <span class="operator-symbol">➕</span>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="number2" class="input-label">Second Number:</label>
+                            <input 
+                                type="number" 
+                                id="number2" 
+                                class="number-input" 
+                                placeholder="Enter second number"
+                                step="any"
+                            >
+                        </div>
+                    </div>
+                    
+                    <div class="equals-section">
+                        <span class="equals-symbol">=</span>
+                    </div>
+                    
+                    <div class="result-section">
+                        <div class="result-display">
+                            <span class="result-label">Result:</span>
+                            <span id="result" class="result-value">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="button-section">
+                        <button id="calculateBtn" class="calculate-btn">
+                            <span class="btn-text">Calculate</span>
+                            <span class="btn-icon">⚡</span>
+                        </button>
+                        
+                        <button id="clearBtn" class="clear-btn">
+                            <span class="btn-text">Clear</span>
+                            <span class="btn-icon">🗑️</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="features-section">
+                <h3>🎯 Calculator Features:</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🔢</span>
+                        <span class="feature-text">Decimal Support</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span>
+                        <span class="feature-text">Instant Results</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🎨</span>
+                        <span class="feature-text">Modern Design</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📱</span>
+                        <span class="feature-text">Mobile Friendly</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="history-section">
+                <h3>📊 Calculation History:</h3>
+                <div id="historyList" class="history-list">
+                    <p class="history-empty">No calculations yet. Start adding numbers!</p>
+                </div>
+                <button id="clearHistoryBtn" class="clear-history-btn">
+                    <span class="btn-text">Clear History</span>
+                    <span class="btn-icon">🗑️</span>
+                </button>
+            </div>
+        </main>
+        
+        <footer class="footer">
+            <p>🚀 Task 2.3 - JavaScript Calculator Functionality</p>
+        </footer>
+    </div>
+
+    <script>
+        // Basic Calculator functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const number1Input = document.getElementById('number1');
+            const number2Input = document.getElementById('number2');
+            const resultSpan = document.getElementById('result');
+            const calculateBtn = document.getElementById('calculateBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const historyList = document.getElementById('historyList');
+            const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+            
+            let calculationHistory = [];
+            
+            // Calculate the sum of two numbers
+            function calculateSum() {
+                const num1 = parseFloat(number1Input.value) || 0;
+                const num2 = parseFloat(number2Input.value) || 0;
+                const result = num1 + num2;
+                
+                // Display result
+                resultSpan.textContent = result.toLocaleString();
+                
+                // Add to history
+                addToHistory(num1, num2, result);
+                
+                // Animate result
+                animateResult();
+                
+                return result;
+            }
+            
+            // Add calculation to history
+            function addToHistory(num1, num2, result) {
+                const calculation = {
+                    num1: num1,
+                    num2: num2,
+                    result: result,
+                    timestamp: new Date().toLocaleTimeString()
+                };
+                
+                calculationHistory.unshift(calculation); // Add to beginning
+                
+                // Limit history to 10 items
+                if (calculationHistory.length > 10) {
+                    calculationHistory.pop();
+                }
+                
+                updateHistoryDisplay();
+            }
+            
+            // Update history display
+            function updateHistoryDisplay() {
+                if (calculationHistory.length === 0) {
+                    historyList.innerHTML = '<p class="history-empty">No calculations yet. Start adding numbers!</p>';
+                    return;
+                }
+                
+                const historyHTML = calculationHistory.map((calc, index) => `
+                    <div class="history-item" style="animation-delay: ${index * 0.1}s">
+                        <span class="history-calculation">
+                            ${calc.num1.toLocaleString()} + ${calc.num2.toLocaleString()} = 
+                            <strong>${calc.result.toLocaleString()}</strong>
+                        </span>
+                        <span class="history-time">${calc.timestamp}</span>
+                    </div>
+                `).join('');
+                
+                historyList.innerHTML = historyHTML;
+            }
+            
+            // Clear all inputs and result
+            function clearCalculator() {
+                number1Input.value = '';
+                number2Input.value = '';
+                resultSpan.textContent = '0';
+                
+                // Add clear animation
+                const calculator = document.querySelector('.calculator-container');
+                calculator.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    calculator.style.animation = '';
+                }, 500);
+            }
+            
+            // Clear calculation history
+            function clearHistory() {
+                calculationHistory = [];
+                updateHistoryDisplay();
+                
+                // Add clear animation
+                historyList.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    historyList.style.animation = '';
+                }, 300);
+            }
+            
+            // Animate result display
+            function animateResult() {
+                resultSpan.style.animation = 'none';
+                setTimeout(() => {
+                    resultSpan.style.animation = 'resultPop 0.6s ease-out';
+                }, 10);
+            }
+            
+            // Auto-calculate on input change
+            function autoCalculate() {
+                if (number1Input.value && number2Input.value) {
+                    calculateSum();
+                }
+            }
+            
+            // Event listeners
+            calculateBtn.addEventListener('click', function() {
+                if (!number1Input.value || !number2Input.value) {
+                    alert('⚠️ Please enter both numbers before calculating!');
+                    return;
+                }
+                
+                calculateSum();
+                
+                // Add button click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            clearBtn.addEventListener('click', function() {
+                clearCalculator();
+                
+                // Add button click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            clearHistoryBtn.addEventListener('click', function() {
+                if (calculationHistory.length === 0) {
+                    alert('📝 History is already empty!');
+                    return;
+                }
+                
+                clearHistory();
+                
+                // Add button click animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Auto-calculate on input
+            number1Input.addEventListener('input', autoCalculate);
+            number2Input.addEventListener('input', autoCalculate);
+            
+            // Enter key to calculate
+            number1Input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    number2Input.focus();
+                }
+            });
+            
+            number2Input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    calculateBtn.click();
+                }
+            });
+            
+            // Focus first input on load
+            setTimeout(() => {
+                number1Input.focus();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

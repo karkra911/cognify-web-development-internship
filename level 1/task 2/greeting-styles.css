@@ -1,0 +1,372 @@
+/* Task 2.2 - Time-Based Greeting Styles */
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Container styles */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Header styles */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Main content styles */
+.main-content {
+    padding: 40px;
+}
+
+/* Time display styles */
+.time-display {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.current-time {
+    margin-bottom: 15px;
+}
+
+.time-label {
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.time-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+}
+
+.date-value {
+    font-size: 1.3rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Greeting section styles */
+.greeting-section {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.greeting-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 18px 35px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.greeting-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.btn-icon {
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.greeting-btn:hover .btn-icon {
+    transform: scale(1.2);
+}
+
+/* Greeting display styles */
+.greeting-display {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 600px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    border: 3px solid #667eea;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+}
+
+.greeting-display.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.greeting-content {
+    text-align: center;
+}
+
+.greeting-emoji {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.greeting-message {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+/* Info section styles */
+.info-section {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.info-section h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.schedule-item {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.schedule-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.time-range {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.greeting-type {
+    display: block;
+    font-size: 1rem;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Controls styles */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.alert-btn, .auto-btn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-btn:hover, .auto-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.auto-btn.active {
+    background: linear-gradient(135deg, #dc3545 0%, #e74c3c 100%);
+}
+
+.auto-btn.active:hover {
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+/* Footer styles */
+.footer {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-weight: 500;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+    }
+    
+    .title {
+        font-size: 2rem;
+        letter-spacing: 1px;
+    }
+    
+    .main-content {
+        padding: 30px 20px;
+    }
+    
+    .time-value {
+        font-size: 2rem;
+    }
+    
+    .greeting-btn {
+        padding: 15px 30px;
+        font-size: 1.2rem;
+    }
+    
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .alert-btn, .auto-btn {
+        width: 200px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .time-display {
+        padding: 20px;
+    }
+    
+    .time-value {
+        font-size: 1.8rem;
+    }
+    
+    .greeting-display {
+        padding: 20px;
+    }
+    
+    .greeting-message {
+        font-size: 1.1rem;
+    }
+}
+
+/* Animation keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Time update animation */
+.time-value {
+    animation: timeUpdate 1s ease-in-out infinite alternate;
+}
+
+@keyframes timeUpdate {
+    0% {
+        text-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+    }
+    100% {
+        text-shadow: 0 4px 10px rgba(102, 126, 234, 0.5);
+    }
+}

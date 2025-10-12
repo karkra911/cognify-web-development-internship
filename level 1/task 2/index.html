@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 - JavaScript Projects Hub</title>
+    <link rel="stylesheet" href="task2-master-styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="hero-section">
+            <h1 class="main-title">⚡ Task 2 - JavaScript Projects</h1>
+            <p class="main-subtitle">Interactive web applications showcasing JavaScript functionality</p>
+        </header>
+        
+        <main class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">🎨</div>
+                <h2 class="project-title">Color Changing Button</h2>
+                <p class="project-description">
+                    An interactive button that cycles through multiple colors when clicked, featuring smooth transitions and click tracking.
+                </p>
+                <div class="project-features">
+                    <span class="feature-tag">Event Handling</span>
+                    <span class="feature-tag">DOM Manipulation</span>
+                    <span class="feature-tag">Animations</span>
+                </div>
+                <div class="project-stats">
+                    <span class="stat">🎯 10 Colors</span>
+                    <span class="stat">📊 Click Counter</span>
+                    <span class="stat">🔄 Reset Function</span>
+                </div>
+                <a href="color-button.html" class="project-link">
+                    <span>Try It Now</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-icon">⏰</div>
+                <h2 class="project-title">Time-Based Greeting</h2>
+                <p class="project-description">
+                    Smart greeting system that displays personalized messages based on current time, with both page display and alert options.
+                </p>
+                <div class="project-features">
+                    <span class="feature-tag">Date & Time</span>
+                    <span class="feature-tag">Alert Boxes</span>
+                    <span class="feature-tag">Conditional Logic</span>
+                </div>
+                <div class="project-stats">
+                    <span class="stat">🌅 4 Time Periods</span>
+                    <span class="stat">⚡ Auto Mode</span>
+                    <span class="stat">📱 Live Clock</span>
+                </div>
+                <a href="greeting.html" class="project-link">
+                    <span>Try It Now</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-icon">🧮</div>
+                <h2 class="project-title">Basic Calculator</h2>
+                <p class="project-description">
+                    A functional calculator that adds two numbers with instant results, calculation history, and modern interface design.
+                </p>
+                <div class="project-features">
+                    <span class="feature-tag">Math Operations</span>
+                    <span class="feature-tag">Input Validation</span>
+                    <span class="feature-tag">Local Storage</span>
+                </div>
+                <div class="project-stats">
+                    <span class="stat">➕ Addition</span>
+                    <span class="stat">📊 History</span>
+                    <span class="stat">⚡ Auto-Calculate</span>
+                </div>
+                <a href="calculator.html" class="project-link">
+                    <span>Try It Now</span>
+                    <span class="link-arrow">→</span>
+                </a>
+            </div>
+        </main>
+        
+        <section class="skills-section">
+            <h2 class="skills-title">🚀 JavaScript Skills Demonstrated</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <span class="skill-icon">🎯</span>
+                    <h3>Event Handling</h3>
+                    <p>Click events, input changes, keyboard interactions</p>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-icon">🔧</span>
+                    <h3>DOM Manipulation</h3>
+                    <p>Element selection, content updates, style changes</p>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-icon">🕐</span>
+                    <h3>Date & Time</h3>
+                    <p>Current time retrieval, formatting, conditional logic</p>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-icon">🔢</span>
+                    <h3>Mathematical Operations</h3>
+                    <p>Number parsing, calculations, result formatting</p>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-icon">✅</span>
+                    <h3>Input Validation</h3>
+                    <p>Form validation, error handling, user feedback</p>
+                </div>
+                <div class="skill-item">
+                    <span class="skill-icon">🎨</span>
+                    <h3>Dynamic Styling</h3>
+                    <p>CSS property changes, animations, visual feedback</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="navigation-section">
+            <h2 class="nav-title">🗂️ Project Navigation</h2>
+            <div class="nav-links">
+                <a href="../task 1/master-hub.html" class="nav-btn prev">
+                    <span class="nav-icon">←</span>
+                    <span class="nav-text">Task 1 (HTML/CSS)</span>
+                </a>
+                <a href="#" class="nav-btn current">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-text">Task 2 (JavaScript)</span>
+                </a>
+                <a href="#" class="nav-btn next disabled">
+                    <span class="nav-icon">→</span>
+                    <span class="nav-text">Task 3 (Coming Soon)</span>
+                </a>
+            </div>
+        </section>
+        
+        <footer class="footer">
+            <p>🎯 Task 2 Complete - Interactive JavaScript Applications</p>
+            <p class="tech-stack">Built with: HTML5 • CSS3 • Vanilla JavaScript • Modern ES6+</p>
+        </footer>
+    </div>
+
+    <script>
+        // Task 2 Master Page JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation to project cards
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Add hover effects to skill items
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px) scale(1.02)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            // Add click tracking for project links
+            const projectLinks = document.querySelectorAll('.project-link');
+            projectLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const projectTitle = this.closest('.project-card').querySelector('.project-title').textContent;
+                    console.log(`Navigating to: ${projectTitle}`);
+                    
+                    // Add click animation
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+            
+            // Dynamic stats counter animation
+            function animateStats() {
+                const stats = document.querySelectorAll('.stat');
+                stats.forEach(stat => {
+                    stat.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        stat.style.transform = 'scale(1)';
+                    }, 200);
+                });
+            }
+            
+            // Trigger stats animation every 10 seconds
+            setInterval(animateStats, 10000);
+            
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe sections for scroll animations
+            const sections = document.querySelectorAll('.skills-section, .navigation-section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Easter egg: Konami Code
+            let konamiCode = [];
+            const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+            
+            document.addEventListener('keydown', function(e) {
+                konamiCode.push(e.keyCode);
+                if (konamiCode.length > konami.length) {
+                    konamiCode.shift();
+                }
+                
+                if (konamiCode.toString() === konami.toString()) {
+                    // Activate easter egg
+                    document.body.style.animation = 'rainbow 2s infinite';
+                    setTimeout(() => {
+                        document.body.style.animation = '';
+                        alert('🎉 Konami Code activated! You found the easter egg!');
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2 - All JavaScript Projects in One</title>
+    <link rel="stylesheet" href="master-all-styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">⚡ Task 2 - JavaScript Projects Hub</h1>
+            <p class="subtitle">All three interactive projects in one unified interface</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-tab="color-button">
+                <span class="tab-icon">🎨</span>
+                <span class="tab-text">Color Button</span>
+            </button>
+            <button class="tab-btn" data-tab="greeting">
+                <span class="tab-icon">⏰</span>
+                <span class="tab-text">Time Greeting</span>
+            </button>
+            <button class="tab-btn" data-tab="calculator">
+                <span class="tab-icon">🧮</span>
+                <span class="tab-text">Calculator</span>
+            </button>
+        </nav>
+
+        <!-- Project Sections -->
+        <main class="main-content">
+            <!-- Color Changing Button Project -->
+            <section id="color-button" class="project-section active">
+                <div class="project-header">
+                    <h2>🎨 Color Changing Button</h2>
+                    <p>Click the button to cycle through different colors!</p>
+                </div>
+                
+                <div class="color-project">
+                    <button id="colorBtn" class="color-button">
+                        <span class="btn-text">Click Me!</span>
+                        <span class="btn-emoji">🌈</span>
+                    </button>
+                    
+                    <div class="color-info">
+                        <p>Current Color: <span id="currentColor">Blue</span></p>
+                        <p>Click Count: <span id="clickCount">0</span></p>
+                        <button id="resetBtn" class="reset-button">Reset</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Time-Based Greeting Project -->
+            <section id="greeting" class="project-section">
+                <div class="project-header">
+                    <h2>⏰ Time-Based Greeting</h2>
+                    <p>Get personalized greetings based on current time!</p>
+                </div>
+                
+                <div class="greeting-project">
+                    <div class="time-display">
+                        <div class="current-time">
+                            <span>Current Time: </span>
+                            <span id="timeDisplay"></span>
+                        </div>
+                        <div class="current-date">
+                            <span id="dateDisplay"></span>
+                        </div>
+                    </div>
+                    
+                    <button id="greetBtn" class="greeting-button">
+                        <span>Get My Greeting</span>
+                        <span>💬</span>
+                    </button>
+                    
+                    <button id="alertBtn" class="alert-button">
+                        <span>Show Alert</span>
+                        <span>⚠️</span>
+                    </button>
+                    
+                    <div id="greetingResult" class="greeting-result">
+                        <span id="greetingEmoji">👋</span>
+                        <p id="greetingText">Click the button to get your greeting!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calculator Project -->
+            <section id="calculator" class="project-section">
+                <div class="project-header">
+                    <h2>🧮 Basic Calculator</h2>
+                    <p>Add two numbers together and see the result!</p>
+                </div>
+                
+                <div class="calculator-project">
+                    <div class="calc-inputs">
+                        <input type="number" id="num1" placeholder="First number" class="calc-input">
+                        <span class="operator">+</span>
+                        <input type="number" id="num2" placeholder="Second number" class="calc-input">
+                        <span class="equals">=</span>
+                        <span id="calcResult" class="calc-result">0</span>
+                    </div>
+                    
+                    <div class="calc-buttons">
+                        <button id="calculateBtn" class="calc-button">
+                            <span>Calculate</span>
+                            <span>⚡</span>
+                        </button>
+                        <button id="clearCalcBtn" class="clear-button">
+                            <span>Clear</span>
+                            <span>🗑️</span>
+                        </button>
+                    </div>
+                    
+                    <div class="calc-history">
+                        <h4>History:</h4>
+                        <div id="historyList" class="history-list">
+                            <p class="no-history">No calculations yet</p>
+                        </div>
+                        <button id="clearHistoryBtn" class="clear-history">Clear History</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>🎯 Task 2 Complete - All JavaScript projects in one unified interface</p>
+        </footer>
+    </div>
+
+    <script>
+        // All JavaScript functionality in one file
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // ===========================================
+            // TAB NAVIGATION FUNCTIONALITY
+            // ===========================================
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const projectSections = document.querySelectorAll('.project-section');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and sections
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    projectSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding section
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+
+            // ===========================================
+            // COLOR CHANGING BUTTON FUNCTIONALITY
+            // ===========================================
+            const colorButton = document.getElementById('colorBtn');
+            const resetButton = document.getElementById('resetBtn');
+            const currentColorSpan = document.getElementById('currentColor');
+            const clickCountSpan = document.getElementById('clickCount');
+            
+            const colors = [
+                { name: 'Blue', value: '#3498db' },
+                { name: 'Red', value: '#e74c3c' },
+                { name: 'Green', value: '#2ecc71' },
+                { name: 'Purple', value: '#9b59b6' },
+                { name: 'Orange', value: '#f39c12' },
+                { name: 'Teal', value: '#1abc9c' },
+                { name: 'Pink', value: '#e91e63' },
+                { name: 'Indigo', value: '#3f51b5' }
+            ];
+            
+            let currentColorIndex = 0;
+            let clickCount = 0;
+            
+            function updateColorButton() {
+                const color = colors[currentColorIndex];
+                colorButton.style.backgroundColor = color.value;
+                colorButton.style.borderColor = color.value;
+                currentColorSpan.textContent = color.name;
+                currentColorSpan.style.color = color.value;
+                clickCountSpan.textContent = clickCount;
+            }
+            
+            colorButton.addEventListener('click', function() {
+                clickCount++;
+                currentColorIndex = (currentColorIndex + 1) % colors.length;
+                updateColorButton();
+                
+                // Animation
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            resetButton.addEventListener('click', function() {
+                currentColorIndex = 0;
+                clickCount = 0;
+                updateColorButton();
+            });
+            
+            updateColorButton(); // Initialize
+
+            // ===========================================
+            // TIME-BASED GREETING FUNCTIONALITY
+            // ===========================================
+            const timeDisplay = document.getElementById('timeDisplay');
+            const dateDisplay = document.getElementById('dateDisplay');
+            const greetButton = document.getElementById('greetBtn');
+            const alertButton = document.getElementById('alertBtn');
+            const greetingResult = document.getElementById('greetingResult');
+            const greetingEmoji = document.getElementById('greetingEmoji');
+            const greetingText = document.getElementById('greetingText');
+            
+            function updateDateTime() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                const dateString = now.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                timeDisplay.textContent = timeString;
+                dateDisplay.textContent = dateString;
+            }
+            
+            function getGreeting() {
+                const hour = new Date().getHours();
+                let greeting, emoji;
+                
+                if (hour >= 5 && hour < 12) {
+                    greeting = "Good Morning! Hope you have a wonderful day ahead!";
+                    emoji = "🌅";
+                } else if (hour >= 12 && hour < 17) {
+                    greeting = "Good Afternoon! Hope your day is going great!";
+                    emoji = "☀️";
+                } else if (hour >= 17 && hour < 21) {
+                    greeting = "Good Evening! Time to wind down and relax!";
+                    emoji = "🌆";
+                } else {
+                    greeting = "Good Night! Sweet dreams and rest well!";
+                    emoji = "🌙";
+                }
+                
+                return { greeting, emoji };
+            }
+            
+            function displayGreeting() {
+                const greetData = getGreeting();
+                greetingEmoji.textContent = greetData.emoji;
+                greetingText.textContent = greetData.greeting;
+                greetingResult.classList.add('show');
+            }
+            
+            greetButton.addEventListener('click', function() {
+                displayGreeting();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            alertButton.addEventListener('click', function() {
+                const greetData = getGreeting();
+                alert(`${greetData.emoji} ${greetData.greeting}`);
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Update time every second
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+
+            // ===========================================
+            // CALCULATOR FUNCTIONALITY
+            // ===========================================
+            const num1Input = document.getElementById('num1');
+            const num2Input = document.getElementById('num2');
+            const calcResultSpan = document.getElementById('calcResult');
+            const calculateButton = document.getElementById('calculateBtn');
+            const clearCalcButton = document.getElementById('clearCalcBtn');
+            const historyList = document.getElementById('historyList');
+            const clearHistoryButton = document.getElementById('clearHistoryBtn');
+            
+            let calculationHistory = [];
+            
+            function calculate() {
+                const number1 = parseFloat(num1Input.value) || 0;
+                const number2 = parseFloat(num2Input.value) || 0;
+                const result = number1 + number2;
+                
+                calcResultSpan.textContent = result.toLocaleString();
+                
+                // Add to history
+                if (num1Input.value && num2Input.value) {
+                    addToHistory(number1, number2, result);
+                }
+                
+                // Animation
+                calcResultSpan.style.animation = 'none';
+                setTimeout(() => {
+                    calcResultSpan.style.animation = 'pulse 0.6s ease-out';
+                }, 10);
+                
+                return result;
+            }
+            
+            function addToHistory(num1, num2, result) {
+                const calculation = {
+                    num1: num1,
+                    num2: num2,
+                    result: result,
+                    time: new Date().toLocaleTimeString()
+                };
+                
+                calculationHistory.unshift(calculation);
+                if (calculationHistory.length > 5) {
+                    calculationHistory.pop();
+                }
+                
+                updateHistoryDisplay();
+            }
+            
+            function updateHistoryDisplay() {
+                if (calculationHistory.length === 0) {
+                    historyList.innerHTML = '<p class="no-history">No calculations yet</p>';
+                    return;
+                }
+                
+                const historyHTML = calculationHistory.map(calc => `
+                    <div class="history-item">
+                        <span>${calc.num1} + ${calc.num2} = <strong>${calc.result}</strong></span>
+                        <small>${calc.time}</small>
+                    </div>
+                `).join('');
+                
+                historyList.innerHTML = historyHTML;
+            }
+            
+            function clearCalculator() {
+                num1Input.value = '';
+                num2Input.value = '';
+                calcResultSpan.textContent = '0';
+            }
+            
+            function clearHistory() {
+                calculationHistory = [];
+                updateHistoryDisplay();
+            }
+            
+            // Event listeners for calculator
+            calculateButton.addEventListener('click', function() {
+                if (!num1Input.value || !num2Input.value) {
+                    alert('Please enter both numbers!');
+                    return;
+                }
+                calculate();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            clearCalcButton.addEventListener('click', function() {
+                clearCalculator();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            clearHistoryButton.addEventListener('click', function() {
+                clearHistory();
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            // Auto-calculate on input
+            num1Input.addEventListener('input', calculate);
+            num2Input.addEventListener('input', calculate);
+            
+            // Enter key navigation
+            num1Input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') num2Input.focus();
+            });
+            
+            num2Input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') calculateButton.click();
+            });
+        });
+    </script>
+</body>
+</html>
