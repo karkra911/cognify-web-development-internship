@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 Task 1 - Bulma Card Components</title>
+    
+    <!-- Bulma CSS Framework -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .main-container {
+            padding: 3rem 1.5rem;
+        }
+
+        .custom-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .custom-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-image img {
+            transition: transform 0.3s ease;
+        }
+
+        .custom-card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .card-header-title {
+            color: white;
+            font-weight: 600;
+        }
+
+        .tag.is-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+        }
+
+        .button.is-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .button.is-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .section-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 300;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-grid {
+            gap: 2rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-card .title {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .notification.is-info {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #2c3e50;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .main-container {
+                padding: 2rem 1rem;
+            }
+            
+            .card-grid {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Back Button -->
+    <a href="index.html" class="button back-button">
+        <span class="icon">
+            <i class="fas fa-arrow-left"></i>
+        </span>
+        <span>Back to Hub</span>
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero is-medium">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="title is-1 has-text-white">
+                    <span class="icon is-large">
+                        <i class="fas fa-layer-group"></i>
+                    </span>
+                    Bulma Card Components
+                </h1>
+                <h2 class="subtitle is-3 has-text-white-ter">
+                    Responsive card designs with modern CSS framework
+                </h2>
+                <div class="notification is-info">
+                    <p class="has-text-weight-semibold">
+                        <span class="icon">
+                            <i class="fas fa-info-circle"></i>
+                        </span>
+                        This page demonstrates responsive card components built with the Bulma CSS framework, featuring images, text, and interactive elements.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Feature Cards Section -->
+            <h2 class="section-title">Feature Showcase Cards</h2>
+            
+            <div class="columns is-multiline card-grid">
+                <!-- Technology Card -->
+                <div class="column is-one-third">
+                    <div class="card custom-card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                <span class="icon">
+                                    <i class="fas fa-code"></i>
+                                </span>
+                                Modern Web Development
+                            </p>
+                        </header>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://picsum.photos/400/300?random=1" alt="Web Development" loading="lazy">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4 class="title is-5">Frontend Technologies</h4>
+                                <p>Explore the latest frontend frameworks and tools that power modern web applications. From responsive design to interactive user interfaces.</p>
+                                <div class="tags">
+                                    <span class="tag is-primary">HTML5</span>
+                                    <span class="tag is-primary">CSS3</span>
+                                    <span class="tag is-primary">JavaScript</span>
+                                    <span class="tag is-primary">Bulma</span>
+                                </div>
+                                <time datetime="2025-10-14" class="has-text-grey">October 14, 2025</time>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </span>
+                                <span>Learn More</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fas fa-heart"></i>
+                                </span>
+                                <span>Like</span>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- Design Card -->
+                <div class="column is-one-third">
+                    <div class="card custom-card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                <span class="icon">
+                                    <i class="fas fa-palette"></i>
+                                </span>
+                                UI/UX Design
+                            </p>
+                        </header>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://picsum.photos/400/300?random=2" alt="UI/UX Design" loading="lazy">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4 class="title is-5">Creative Design Systems</h4>
+                                <p>Discover modern design principles and create stunning user experiences with advanced CSS frameworks and design methodologies.</p>
+                                <div class="tags">
+                                    <span class="tag is-primary">Figma</span>
+                                    <span class="tag is-primary">Design Systems</span>
+                                    <span class="tag is-primary">Responsive</span>
+                                    <span class="tag is-primary">Accessibility</span>
+                                </div>
+                                <time datetime="2025-10-14" class="has-text-grey">October 14, 2025</time>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-external-link-alt"></i>
+                                </span>
+                                <span>Explore</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fas fa-share"></i>
+                                </span>
+                                <span>Share</span>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- Performance Card -->
+                <div class="column is-one-third">
+                    <div class="card custom-card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                <span class="icon">
+                                    <i class="fas fa-rocket"></i>
+                                </span>
+                                Performance Optimization
+                            </p>
+                        </header>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img src="https://picsum.photos/400/300?random=3" alt="Performance" loading="lazy">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <h4 class="title is-5">Lightning Fast Websites</h4>
+                                <p>Learn advanced techniques for optimizing web performance, from lazy loading to efficient CSS frameworks and modern build tools.</p>
+                                <div class="tags">
+                                    <span class="tag is-primary">Optimization</span>
+                                    <span class="tag is-primary">CDN</span>
+                                    <span class="tag is-primary">Lazy Loading</span>
+                                    <span class="tag is-primary">Core Web Vitals</span>
+                                </div>
+                                <time datetime="2025-10-14" class="has-text-grey">October 14, 2025</time>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item button is-primary">
+                                <span class="icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </span>
+                                <span>Analyze</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fas fa-bookmark"></i>
+                                </span>
+                                <span>Save</span>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards Section -->
+            <h2 class="section-title">Project Statistics</h2>
+            
+            <div class="columns is-multiline">
+                <!-- Projects Stats -->
+                <div class="column is-one-fourth">
+                    <div class="card custom-card has-text-centered">
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="feature-icon">
+                                    <i class="fas fa-project-diagram"></i>
+                                </div>
+                                <p class="title is-1 stats-card">15+</p>
+                                <p class="subtitle is-5">Projects Completed</p>
+                                <p class="has-text-grey">Successfully delivered web development projects using modern frameworks and tools.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Technologies Stats -->
+                <div class="column is-one-fourth">
+                    <div class="card custom-card has-text-centered">
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="feature-icon">
+                                    <i class="fas fa-code-branch"></i>
+                                </div>
+                                <p class="title is-1 stats-card">8</p>
+                                <p class="subtitle is-5">Technologies Mastered</p>
+                                <p class="has-text-grey">Proficient in multiple frontend frameworks including Bulma, Bootstrap, and modern CSS.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Stats -->
+                <div class="column is-one-fourth">
+                    <div class="card custom-card has-text-centered">
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <p class="title is-1 stats-card">98%</p>
+                                <p class="subtitle is-5">Performance Score</p>
+                                <p class="has-text-grey">Optimized websites achieving excellent Core Web Vitals and user experience metrics.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Responsive Stats -->
+                <div class="column is-one-fourth">
+                    <div class="card custom-card has-text-centered">
+                        <div class="card-content">
+                            <div class="content">
+                                <div class="feature-icon">
+                                    <i class="fas fa-mobile-alt"></i>
+                                </div>
+                                <p class="title is-1 stats-card">100%</p>
+                                <p class="subtitle is-5">Mobile Responsive</p>
+                                <p class="has-text-grey">All projects designed with mobile-first approach for perfect cross-device compatibility.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Cards Section -->
+            <h2 class="section-title">Team Profiles</h2>
+            
+            <div class="columns is-centered">
+                <!-- Developer Profile -->
+                <div class="column is-one-third">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-square">
+                                <img src="https://picsum.photos/300/300?random=4" alt="Developer Profile" loading="lazy">
+                            </figure>
+                        </div>
+                        <div class="card-content has-text-centered">
+                            <div class="content">
+                                <h4 class="title is-4">Alex Johnson</h4>
+                                <p class="subtitle is-6 has-text-grey">Frontend Developer</p>
+                                <p>Passionate about creating beautiful and functional web experiences using modern frameworks like Bulma and Bootstrap.</p>
+                                <div class="tags is-centered">
+                                    <span class="tag is-primary">React</span>
+                                    <span class="tag is-primary">Vue.js</span>
+                                    <span class="tag is-primary">CSS Frameworks</span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fab fa-github"></i>
+                                </span>
+                                <span>GitHub</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
+                                <span>LinkedIn</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span>Email</span>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- Designer Profile -->
+                <div class="column is-one-third">
+                    <div class="card custom-card">
+                        <div class="card-image">
+                            <figure class="image is-square">
+                                <img src="https://picsum.photos/300/300?random=5" alt="Designer Profile" loading="lazy">
+                            </figure>
+                        </div>
+                        <div class="card-content has-text-centered">
+                            <div class="content">
+                                <h4 class="title is-4">Sarah Chen</h4>
+                                <p class="subtitle is-6 has-text-grey">UI/UX Designer</p>
+                                <p>Expert in creating intuitive user interfaces and seamless user experiences with a focus on accessibility and performance.</p>
+                                <div class="tags is-centered">
+                                    <span class="tag is-primary">Figma</span>
+                                    <span class="tag is-primary">Design Systems</span>
+                                    <span class="tag is-primary">Prototyping</span>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fab fa-dribbble"></i>
+                                </span>
+                                <span>Dribbble</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fab fa-behance"></i>
+                                </span>
+                                <span>Behance</span>
+                            </a>
+                            <a href="#" class="card-footer-item">
+                                <span class="icon">
+                                    <i class="fas fa-globe"></i>
+                                </span>
+                                <span>Portfolio</span>
+                            </a>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Framework Info Section -->
+    <section class="section">
+        <div class="container">
+            <div class="notification is-info">
+                <h3 class="title is-4">
+                    <span class="icon">
+                        <i class="fas fa-info-circle"></i>
+                    </span>
+                    About Bulma Framework
+                </h3>
+                <div class="content">
+                    <p><strong>Bulma</strong> is a modern CSS framework based on Flexbox. It provides:</p>
+                    <ul>
+                        <li><strong>Responsive Design:</strong> Mobile-first approach with flexible grid system</li>
+                        <li><strong>Modern CSS:</strong> Built with Flexbox for perfect alignment and distribution</li>
+                        <li><strong>Modular:</strong> Import only what you need for optimal performance</li>
+                        <li><strong>Pure CSS:</strong> No JavaScript dependencies, just beautiful styles</li>
+                        <li><strong>Easy to Learn:</strong> Intuitive class names and excellent documentation</li>
+                    </ul>
+                    <p>All cards on this page demonstrate Bulma's powerful card component system with custom styling enhancements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add click animations to cards
+        document.querySelectorAll('.custom-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.custom-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Add interactive button effects
+        document.querySelectorAll('.button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

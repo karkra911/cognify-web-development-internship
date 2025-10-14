@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 Task 1 - Front-end Frameworks Master</title>
+    
+    <!-- External Framework CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Master Container Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .master-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        .master-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .master-title {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .master-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .cognifyz-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        /* Tab Navigation */
+        .tab-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            padding: 15px 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-btn.active {
+            background: rgba(255, 255, 255, 0.4);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .tab-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Main Content Container */
+        .content-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 300px);
+        }
+
+        /* Section Management */
+        .framework-section {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .framework-section.active {
+            display: block;
+        }
+
+        /* Overview Section Styles */
+        .overview-section {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .overview-title {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .overview-description {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .framework-preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .framework-preview-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .framework-preview-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .bulma-preview {
+            border-color: #00d1b2;
+        }
+
+        .bootstrap-preview {
+            border-color: #7952b3;
+        }
+
+        .preview-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .bulma-icon {
+            background: linear-gradient(135deg, #00d1b2 0%, #00b89c 100%);
+        }
+
+        .bootstrap-icon {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+        }
+
+        .preview-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .preview-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .preview-features li {
+            padding: 0.25rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .preview-features li i {
+            color: #667eea;
+            margin-right: 0.5rem;
+            width: 16px;
+        }
+
+        /* Bulma Cards Section Styles */
+        .bulma-content body {
+            background: transparent !important;
+        }
+
+        .bulma-cards-container {
+            padding: 0;
+        }
+
+        .bulma-hero {
+            background: linear-gradient(135deg, #00d1b2 0%, #00b89c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .bulma-custom-card {
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .bulma-custom-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Bootstrap Grid Section Styles */
+        .bootstrap-content .container-fluid {
+            padding: 0;
+        }
+
+        .bootstrap-hero {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .bootstrap-section-header {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+            color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .bootstrap-glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .grid-demo {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .grid-demo:hover {
+            background: #e9ecef;
+            border-color: #7952b3;
+            transform: scale(1.02);
+        }
+
+        .grid-demo.primary {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+            color: white;
+            border-color: #7952b3;
+        }
+
+        .grid-demo.secondary {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-color: #fab1a0;
+        }
+
+        .grid-demo.success {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-color: #00b894;
+        }
+
+        /* Responsive Breakpoint Indicator */
+        .breakpoint-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        /* Back to Hub Button */
+        .back-to-hub {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-to-hub:hover {
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+            transform: translateX(-5px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .master-title {
+                font-size: 2rem;
+            }
+            
+            .tab-navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 200px;
+                justify-content: center;
+            }
+            
+            .content-container {
+                padding: 1rem;
+                max-height: calc(100vh - 250px);
+            }
+            
+            .framework-preview-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .back-to-hub,
+            .breakpoint-indicator {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Loading animation */
+        .master-container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Code display styling */
+        .code-display {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Breakpoint Indicator -->
+    <div class="breakpoint-indicator">
+        <i class="fas fa-desktop"></i>
+        <span id="breakpoint">Responsive</span>
+    </div>
+
+    <!-- Back to Hub Button -->
+    <a href="index.html" class="back-to-hub">
+        <i class="fas fa-arrow-left"></i>
+        <span>Back to Hub</span>
+    </a>
+
+    <div class="master-container">
+        <!-- Master Header -->
+        <header class="master-header">
+            <div class="cognifyz-badge">
+                <i class="fas fa-graduation-cap"></i>
+                Cognifyz - Where Data Meets Intelligence
+            </div>
+            <h1 class="master-title">
+                <i class="fas fa-layer-group"></i>
+                Level 2 Task 1 - Master
+            </h1>
+            <p class="master-subtitle">All Front-end Frameworks in One Unified Interface</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" data-section="overview">
+                <span class="tab-icon">🏠</span>
+                <span>Overview</span>
+            </button>
+            <button class="tab-btn" data-section="bulma">
+                <span class="tab-icon">🎨</span>
+                <span>Bulma Cards</span>
+            </button>
+            <button class="tab-btn" data-section="bootstrap">
+                <span class="tab-icon">🏗️</span>
+                <span>Bootstrap Grid</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Container -->
+        <main class="content-container">
+            
+            <!-- Overview Section -->
+            <section id="overview" class="framework-section active">
+                <div class="overview-section">
+                    <h2 class="overview-title">Front-end Frameworks Mastery</h2>
+                    <p class="overview-description">
+                        This unified interface demonstrates mastery of modern CSS frameworks through practical implementations. 
+                        Navigate between tabs to explore responsive card components with Bulma and comprehensive grid layouts with Bootstrap.
+                    </p>
+
+                    <div class="framework-preview-grid">
+                        <!-- Bulma Preview -->
+                        <div class="framework-preview-card bulma-preview" onclick="switchSection('bulma')">
+                            <div class="preview-icon bulma-icon">
+                                <i class="fas fa-th-large"></i>
+                            </div>
+                            <h3 class="preview-title">Bulma Framework</h3>
+                            <p class="preview-description">
+                                Modern CSS framework based on Flexbox with beautiful card components
+                            </p>
+                            <ul class="preview-features">
+                                <li><i class="fas fa-check"></i> Responsive card components</li>
+                                <li><i class="fas fa-check"></i> Feature showcase cards</li>
+                                <li><i class="fas fa-check"></i> Statistics & profile cards</li>
+                                <li><i class="fas fa-check"></i> Pure CSS framework</li>
+                                <li><i class="fas fa-check"></i> Glassmorphism effects</li>
+                            </ul>
+                        </div>
+
+                        <!-- Bootstrap Preview -->
+                        <div class="framework-preview-card bootstrap-preview" onclick="switchSection('bootstrap')">
+                            <div class="preview-icon bootstrap-icon">
+                                <i class="fas fa-grip-horizontal"></i>
+                            </div>
+                            <h3 class="preview-title">Bootstrap Framework</h3>
+                            <p class="preview-description">
+                                Powerful 12-column grid system with comprehensive responsive utilities
+                            </p>
+                            <ul class="preview-features">
+                                <li><i class="fas fa-check"></i> 12-column grid system</li>
+                                <li><i class="fas fa-check"></i> All responsive breakpoints</li>
+                                <li><i class="fas fa-check"></i> Nested grid examples</li>
+                                <li><i class="fas fa-check"></i> Grid utilities & alignment</li>
+                                <li><i class="fas fa-check"></i> Real-time indicators</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-lightbulb"></i>
+                        <strong>Pro Tip:</strong> Use the tabs above to explore each framework implementation. 
+                        Each section demonstrates best practices and advanced techniques for modern web development.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bulma Cards Section -->
+            <section id="bulma" class="framework-section">
+                <div class="bulma-content">
+                    <div class="bulma-hero">
+                        <h2 class="title is-2">
+                            <i class="fas fa-th-large"></i>
+                            Bulma Card Components
+                        </h2>
+                        <p class="subtitle is-4">Responsive card designs with modern CSS framework</p>
+                    </div>
+
+                    <!-- Feature Cards -->
+                    <h3 class="title is-3 has-text-centered mb-4">Feature Showcase Cards</h3>
+                    <div class="columns is-multiline">
+                        <!-- Technology Card -->
+                        <div class="column is-one-third">
+                            <div class="card bulma-custom-card">
+                                <header class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <p class="card-header-title" style="color: white;">
+                                        <span class="icon"><i class="fas fa-code"></i></span>
+                                        Modern Web Development
+                                    </p>
+                                </header>
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="https://picsum.photos/400/300?random=1" alt="Web Development">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4 class="title is-5">Frontend Technologies</h4>
+                                        <p>Explore modern frontend frameworks and tools that power web applications.</p>
+                                        <div class="tags">
+                                            <span class="tag is-primary">HTML5</span>
+                                            <span class="tag is-primary">CSS3</span>
+                                            <span class="tag is-primary">Bulma</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                                        <span>Learn More</span>
+                                    </a>
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-heart"></i></span>
+                                        <span>Like</span>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <!-- Design Card -->
+                        <div class="column is-one-third">
+                            <div class="card bulma-custom-card">
+                                <header class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <p class="card-header-title" style="color: white;">
+                                        <span class="icon"><i class="fas fa-palette"></i></span>
+                                        UI/UX Design
+                                    </p>
+                                </header>
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="https://picsum.photos/400/300?random=2" alt="UI/UX Design">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4 class="title is-5">Creative Design Systems</h4>
+                                        <p>Discover modern design principles and create stunning user experiences.</p>
+                                        <div class="tags">
+                                            <span class="tag is-primary">Figma</span>
+                                            <span class="tag is-primary">Design Systems</span>
+                                            <span class="tag is-primary">Responsive</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                                        <span>Explore</span>
+                                    </a>
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-share"></i></span>
+                                        <span>Share</span>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
+
+                        <!-- Performance Card -->
+                        <div class="column is-one-third">
+                            <div class="card bulma-custom-card">
+                                <header class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <p class="card-header-title" style="color: white;">
+                                        <span class="icon"><i class="fas fa-rocket"></i></span>
+                                        Performance Optimization
+                                    </p>
+                                </header>
+                                <div class="card-image">
+                                    <figure class="image is-4by3">
+                                        <img src="https://picsum.photos/400/300?random=3" alt="Performance">
+                                    </figure>
+                                </div>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <h4 class="title is-5">Lightning Fast Websites</h4>
+                                        <p>Learn advanced techniques for optimizing web performance.</p>
+                                        <div class="tags">
+                                            <span class="tag is-primary">Optimization</span>
+                                            <span class="tag is-primary">CDN</span>
+                                            <span class="tag is-primary">Core Web Vitals</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="card-footer">
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-chart-line"></i></span>
+                                        <span>Analyze</span>
+                                    </a>
+                                    <a href="#" class="card-footer-item">
+                                        <span class="icon"><i class="fas fa-bookmark"></i></span>
+                                        <span>Save</span>
+                                    </a>
+                                </footer>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <h3 class="title is-3 has-text-centered mb-4">Project Statistics</h3>
+                    <div class="columns is-multiline">
+                        <div class="column is-one-fourth">
+                            <div class="card bulma-custom-card has-text-centered">
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div style="font-size: 3rem; color: #00d1b2; margin-bottom: 1rem;">
+                                            <i class="fas fa-project-diagram"></i>
+                                        </div>
+                                        <p class="title is-1" style="color: #00d1b2;">15+</p>
+                                        <p class="subtitle is-5">Projects Completed</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <div class="card bulma-custom-card has-text-centered">
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div style="font-size: 3rem; color: #00d1b2; margin-bottom: 1rem;">
+                                            <i class="fas fa-code-branch"></i>
+                                        </div>
+                                        <p class="title is-1" style="color: #00d1b2;">8</p>
+                                        <p class="subtitle is-5">Technologies Mastered</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <div class="card bulma-custom-card has-text-centered">
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div style="font-size: 3rem; color: #00d1b2; margin-bottom: 1rem;">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                        </div>
+                                        <p class="title is-1" style="color: #00d1b2;">98%</p>
+                                        <p class="subtitle is-5">Performance Score</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-one-fourth">
+                            <div class="card bulma-custom-card has-text-centered">
+                                <div class="card-content">
+                                    <div class="content">
+                                        <div style="font-size: 3rem; color: #00d1b2; margin-bottom: 1rem;">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+                                        <p class="title is-1" style="color: #00d1b2;">100%</p>
+                                        <p class="subtitle is-5">Mobile Responsive</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bootstrap Grid Section -->
+            <section id="bootstrap" class="framework-section">
+                <div class="bootstrap-content">
+                    <div class="bootstrap-hero">
+                        <h2>
+                            <i class="fas fa-th-large"></i>
+                            Bootstrap Grid System
+                        </h2>
+                        <p>Responsive grid layouts with Bootstrap's powerful 12-column system</p>
+                    </div>
+
+                    <!-- Basic Grid Layout -->
+                    <div class="bootstrap-section-header">
+                        <h3><i class="fas fa-grip-horizontal"></i> Basic Grid Layout</h3>
+                        <p>Understanding Bootstrap's 12-column grid system</p>
+                    </div>
+
+                    <div class="bootstrap-glass-card">
+                        <h4>Equal Width Columns</h4>
+                        <div class="row">
+                            <div class="col">
+                                <div class="grid-demo primary">col</div>
+                            </div>
+                            <div class="col">
+                                <div class="grid-demo secondary">col</div>
+                            </div>
+                            <div class="col">
+                                <div class="grid-demo success">col</div>
+                            </div>
+                        </div>
+                        
+                        <div class="code-display mt-3">
+                            &lt;div class="row"&gt;<br>
+                            &nbsp;&nbsp;&lt;div class="col"&gt;Column 1&lt;/div&gt;<br>
+                            &nbsp;&nbsp;&lt;div class="col"&gt;Column 2&lt;/div&gt;<br>
+                            &nbsp;&nbsp;&lt;div class="col"&gt;Column 3&lt;/div&gt;<br>
+                            &lt;/div&gt;
+                        </div>
+                    </div>
+
+                    <!-- Responsive Grid Layout -->
+                    <div class="bootstrap-section-header">
+                        <h3><i class="fas fa-mobile-alt"></i> Responsive Grid Layout</h3>
+                        <p>Adaptive layouts that change based on screen size</p>
+                    </div>
+
+                    <div class="bootstrap-glass-card">
+                        <h4>Mobile-First Responsive Design</h4>
+                        <div class="row">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="grid-demo primary">
+                                    <div>
+                                        <i class="fas fa-mobile-alt d-block mb-2"></i>
+                                        XS: 12 cols<br>
+                                        MD: 6 cols<br>
+                                        LG: 4 cols
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6 col-lg-4">
+                                <div class="grid-demo secondary">
+                                    <div>
+                                        <i class="fas fa-tablet-alt d-block mb-2"></i>
+                                        XS: 12 cols<br>
+                                        MD: 6 cols<br>
+                                        LG: 4 cols
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="grid-demo success">
+                                    <div>
+                                        <i class="fas fa-desktop d-block mb-2"></i>
+                                        XS: 12 cols<br>
+                                        MD: 12 cols<br>
+                                        LG: 4 cols
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Complex Layout Example -->
+                    <div class="bootstrap-section-header">
+                        <h3><i class="fas fa-layer-group"></i> Complex Layout Example</h3>
+                        <p>Real-world layout patterns using Bootstrap grid</p>
+                    </div>
+
+                    <div class="bootstrap-glass-card">
+                        <!-- Header Row -->
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="grid-demo primary">
+                                    <i class="fas fa-bars"></i> Header (col-12)
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Row -->
+                        <div class="row mb-3">
+                            <div class="col-12 col-md-3">
+                                <div class="grid-demo" style="background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); color: white;">
+                                    <i class="fas fa-sidebar"></i> Sidebar<br>
+                                    <small>col-12 col-md-3</small>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-9">
+                                <div class="grid-demo" style="background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);">
+                                    <i class="fas fa-newspaper"></i> Main Content<br>
+                                    <small>col-12 col-md-9</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="grid-demo primary">
+                                    <i class="fas fa-copyright"></i> Footer (col-12)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bootstrap Info -->
+                    <div class="alert alert-info">
+                        <h4><i class="fas fa-info-circle"></i> About Bootstrap Grid System</h4>
+                        <p><strong>Bootstrap</strong> provides a powerful 12-column grid system with:</p>
+                        <ul>
+                            <li><strong>Mobile-First:</strong> Responsive design starting from mobile</li>
+                            <li><strong>Flexbox:</strong> Built on CSS Flexbox for better alignment</li>
+                            <li><strong>Breakpoints:</strong> XS, SM, MD, LG, XL, XXL responsive breakpoints</li>
+                            <li><strong>Utilities:</strong> Extensive utility classes for spacing and alignment</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Tab switching functionality
+        function switchSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.framework-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-btn').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to clicked tab
+            document.querySelector(`[data-section="${sectionName}"]`).classList.add('active');
+        }
+
+        // Add click event listeners to tabs
+        document.querySelectorAll('.tab-btn').forEach(tab => {
+            tab.addEventListener('click', function() {
+                const section = this.getAttribute('data-section');
+                switchSection(section);
+            });
+        });
+
+        // Update breakpoint indicator
+        function updateBreakpointIndicator() {
+            const width = window.innerWidth;
+            const indicator = document.getElementById('breakpoint');
+            
+            if (width < 576) {
+                indicator.textContent = 'XS';
+            } else if (width < 768) {
+                indicator.textContent = 'SM';
+            } else if (width < 992) {
+                indicator.textContent = 'MD';
+            } else if (width < 1200) {
+                indicator.textContent = 'LG';
+            } else if (width < 1400) {
+                indicator.textContent = 'XL';
+            } else {
+                indicator.textContent = 'XXL';
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            updateBreakpointIndicator();
+            
+            // Add loading animation to cards
+            document.querySelectorAll('.bulma-custom-card, .bootstrap-glass-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Update breakpoint on resize
+        window.addEventListener('resize', updateBreakpointIndicator);
+
+        // Add interactive effects to grid demos
+        document.querySelectorAll('.grid-demo').forEach(demo => {
+            demo.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add click animations to preview cards
+        document.querySelectorAll('.framework-preview-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

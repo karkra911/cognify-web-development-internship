@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 Task 1 - Front-end Frameworks Hub</title>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Glass morphism container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Section */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .header .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .header .description {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            color: #2c3e50;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .cognifyz-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        /* Framework Cards */
+        .frameworks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex: 1;
+        }
+
+        .framework-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .framework-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .framework-card:hover::before {
+            left: 100%;
+        }
+
+        .framework-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .framework-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .framework-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-right: 1.5rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .bulma-icon {
+            background: linear-gradient(135deg, #00d1b2 0%, #00b89c 100%);
+        }
+
+        .bootstrap-icon {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+        }
+
+        .framework-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .framework-subtitle {
+            color: #718096;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .framework-description {
+            color: #4a5568;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #4a5568;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+        }
+
+        .features-list li i {
+            color: #667eea;
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+
+        .framework-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            justify-content: center;
+        }
+
+        .framework-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+
+        .framework-button:active {
+            transform: translateY(-1px);
+        }
+
+        .bulma-button {
+            background: linear-gradient(135deg, #00d1b2 0%, #00b89c 100%);
+            box-shadow: 0 8px 25px rgba(0, 209, 178, 0.3);
+        }
+
+        .bulma-button:hover {
+            box-shadow: 0 12px 30px rgba(0, 209, 178, 0.4);
+        }
+
+        .bootstrap-button {
+            background: linear-gradient(135deg, #7952b3 0%, #563d7c 100%);
+            box-shadow: 0 8px 25px rgba(121, 82, 179, 0.3);
+        }
+
+        .bootstrap-button:hover {
+            box-shadow: 0 12px 30px rgba(121, 82, 179, 0.4);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        /* Navigation Links */
+        .navigation-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .nav-link {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+            color: #2c3e50;
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        .nav-link i {
+            color: #667eea;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .header .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .header {
+                padding: 2rem 1.5rem;
+            }
+
+            .frameworks-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .framework-card {
+                padding: 2rem;
+            }
+
+            .framework-title {
+                font-size: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .framework-card {
+                padding: 1.5rem;
+            }
+
+            .framework-button {
+                padding: 0.75rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Loading Animation */
+        .container {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .floating-element.shape1 {
+            top: 10%;
+            left: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element.shape2 {
+            top: 20%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .floating-element.shape3 {
+            bottom: 20%;
+            left: 15%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-element shape1">
+        <i class="fas fa-code" style="font-size: 6rem; color: white;"></i>
+    </div>
+    <div class="floating-element shape2">
+        <i class="fas fa-layer-group" style="font-size: 8rem; color: white;"></i>
+    </div>
+    <div class="floating-element shape3">
+        <i class="fas fa-palette" style="font-size: 7rem; color: white;"></i>
+    </div>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="cognifyz-badge">
+                <i class="fas fa-graduation-cap"></i>
+                Cognifyz - Where Data Meets Intelligence
+            </div>
+            <h1>
+                <i class="fas fa-layer-group"></i>
+                Level 2 - Task 1
+            </h1>
+            <p class="subtitle">Front-end Frameworks Mastery</p>
+            <div class="description">
+                <p><strong><i class="fas fa-target"></i> Mission:</strong> Demonstrate proficiency with modern front-end frameworks by creating responsive components and layouts.</p>
+                <br>
+                <p><strong><i class="fas fa-code"></i> Implementation:</strong> Built responsive card components using <strong>Bulma</strong> and comprehensive grid layouts using <strong>Bootstrap</strong>, showcasing the power and flexibility of modern CSS frameworks.</p>
+            </div>
+        </header>
+
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">2</div>
+                    <div class="stat-label">Frameworks Mastered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Responsive Design</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Grid Columns</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Breakpoints</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Framework Cards -->
+        <main class="frameworks-grid">
+            <!-- Bulma Framework Card -->
+            <article class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon bulma-icon">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div>
+                        <h2 class="framework-title">Bulma Cards</h2>
+                        <p class="framework-subtitle">Modern CSS Framework</p>
+                    </div>
+                </div>
+                <p class="framework-description">
+                    Explore responsive card components built with Bulma, a modern CSS framework based on Flexbox. Features beautiful card designs with images, text, interactive elements, and glassmorphism effects.
+                </p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Responsive card components with images and text</li>
+                    <li><i class="fas fa-check"></i> Feature showcase cards with tags and buttons</li>
+                    <li><i class="fas fa-check"></i> Statistics cards with icons and animations</li>
+                    <li><i class="fas fa-check"></i> Profile cards with social media links</li>
+                    <li><i class="fas fa-check"></i> Pure CSS framework with no JavaScript dependencies</li>
+                    <li><i class="fas fa-check"></i> Modern glassmorphism design effects</li>
+                </ul>
+                <a href="bulma-cards.html" class="framework-button bulma-button">
+                    <i class="fas fa-eye"></i>
+                    <span>Explore Bulma Cards</span>
+                </a>
+            </article>
+
+            <!-- Bootstrap Framework Card -->
+            <article class="framework-card">
+                <div class="framework-header">
+                    <div class="framework-icon bootstrap-icon">
+                        <i class="fas fa-grip-horizontal"></i>
+                    </div>
+                    <div>
+                        <h2 class="framework-title">Bootstrap Grid</h2>
+                        <p class="framework-subtitle">Responsive Grid System</p>
+                    </div>
+                </div>
+                <p class="framework-description">
+                    Master Bootstrap's powerful 12-column grid system with comprehensive examples of responsive layouts. Learn breakpoints, nesting, alignment, and advanced grid utilities.
+                </p>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i> Complete 12-column grid system demonstration</li>
+                    <li><i class="fas fa-check"></i> Responsive breakpoint examples (XS to XXL)</li>
+                    <li><i class="fas fa-check"></i> Nested grids and complex layout patterns</li>
+                    <li><i class="fas fa-check"></i> Grid alignment and ordering utilities</li>
+                    <li><i class="fas fa-check"></i> Real-time breakpoint indicator</li>
+                    <li><i class="fas fa-check"></i> Interactive grid demonstrations</li>
+                </ul>
+                <a href="bootstrap-grid.html" class="framework-button bootstrap-button">
+                    <i class="fas fa-th"></i>
+                    <span>Explore Bootstrap Grid</span>
+                </a>
+            </article>
+        </main>
+
+        <!-- Navigation Section -->
+        <section class="navigation-section">
+            <h3 class="navigation-title">
+                <i class="fas fa-compass"></i>
+                Quick Navigation
+            </h3>
+            <div class="nav-links">
+                <a href="../../README.md" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span>Documentation</span>
+                </a>
+                <a href="../../../" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    <span>Portfolio Home</span>
+                </a>
+                <a href="../../level 1/task 1/master-hub.html" class="nav-link">
+                    <i class="fas fa-code"></i>
+                    <span>Level 1 Projects</span>
+                </a>
+                <a href="../../level 1/task 2/master-all-in-one.html" class="nav-link">
+                    <i class="fas fa-cogs"></i>
+                    <span>JavaScript Projects</span>
+                </a>
+            </div>
+        </section>
+    </div>
+
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add loading animation to cards
+        window.addEventListener('load', function() {
+            const cards = document.querySelectorAll('.framework-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.8s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+
+        // Add click animations to buttons
+        document.querySelectorAll('.framework-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+                ripple.style.pointerEvents = 'none';
+                ripple.style.animation = 'ripple 0.6s linear';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add interactive hover effects
+        document.querySelectorAll('.framework-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.25)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.1)';
+            });
+        });
+
+        // Add parallax effect to floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('.floating-element').forEach((element, index) => {
+                const speed = (index + 1) * 0.2;
+                element.style.transform = `translateY(${rate * speed}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

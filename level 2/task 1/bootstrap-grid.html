@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 Task 1 - Bootstrap Grid Layout</title>
+    
+    <!-- Bootstrap CSS Framework -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glass morphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .glass-hero {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        /* Header styling */
+        .hero-section {
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        /* Grid demonstration styles */
+        .grid-demo {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .grid-demo:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: scale(1.02);
+        }
+
+        .grid-demo.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .grid-demo.secondary {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            border-color: #fab1a0;
+        }
+
+        .grid-demo.success {
+            background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+            color: white;
+            border-color: #00b894;
+        }
+
+        .grid-demo.info {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border-color: #74b9ff;
+        }
+
+        .grid-demo.warning {
+            background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+            border-color: #fdcb6e;
+        }
+
+        .grid-demo.danger {
+            background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+            color: white;
+            border-color: #fd79a8;
+        }
+
+        /* Section headers */
+        .section-header {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 2rem 0 1rem 0;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .section-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        /* Code display */
+        .code-display {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .code-display .comment {
+            color: #718096;
+        }
+
+        .code-display .tag {
+            color: #81e6d9;
+        }
+
+        .code-display .class {
+            color: #fbb6ce;
+        }
+
+        /* Responsive breakpoint indicators */
+        .breakpoint-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 1000;
+        }
+
+        /* Back button */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            transform: translateX(-5px);
+        }
+
+        /* Interactive features */
+        .feature-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+
+        /* Nested grid styling */
+        .nested-demo {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+        }
+
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Media query examples visualization */
+        .responsive-demo {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* Extra responsive adjustments */
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .breakpoint-indicator::after {
+                content: " (XS)";
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 768px) {
+            .breakpoint-indicator::after {
+                content: " (SM)";
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 992px) {
+            .breakpoint-indicator::after {
+                content: " (MD)";
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1200px) {
+            .breakpoint-indicator::after {
+                content: " (LG)";
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .breakpoint-indicator::after {
+                content: " (XL)";
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Breakpoint Indicator -->
+    <div class="breakpoint-indicator">
+        <i class="fas fa-desktop"></i>
+        <span id="breakpoint">Responsive</span>
+    </div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        <span class="ms-2">Back to Hub</span>
+    </a>
+
+    <!-- Hero Section -->
+    <div class="container-fluid">
+        <div class="hero-section">
+            <div class="container">
+                <div class="glass-hero p-5">
+                    <h1 class="hero-title">
+                        <i class="fas fa-th-large"></i>
+                        Bootstrap Grid System
+                    </h1>
+                    <p class="hero-subtitle">
+                        Responsive grid layouts with Bootstrap's powerful 12-column system
+                    </p>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Interactive Demo:</strong> Resize your browser window to see the responsive grid system in action!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        
+        <!-- Basic Grid Layout -->
+        <div class="section-header">
+            <h2><i class="fas fa-grip-horizontal"></i> Basic Grid Layout</h2>
+            <p>Understanding Bootstrap's 12-column grid system</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <h4 class="mb-3">Equal Width Columns</h4>
+            <div class="row">
+                <div class="col">
+                    <div class="grid-demo primary">col</div>
+                </div>
+                <div class="col">
+                    <div class="grid-demo secondary">col</div>
+                </div>
+                <div class="col">
+                    <div class="grid-demo success">col</div>
+                </div>
+            </div>
+            
+            <div class="code-display mt-3">
+                <span class="comment"><!-- Equal width columns --></span><br>
+                &lt;<span class="tag">div</span> <span class="class">class</span>="row"&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col"&gt;Column 1&lt;/<span class="tag">div</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col"&gt;Column 2&lt;/<span class="tag">div</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col"&gt;Column 3&lt;/<span class="tag">div</span>&gt;<br>
+                &lt;/<span class="tag">div</span>&gt;
+            </div>
+        </div>
+
+        <!-- Specific Column Widths -->
+        <div class="glass-card p-4 mb-4">
+            <h4 class="mb-3">Specific Column Widths</h4>
+            <div class="row">
+                <div class="col-4">
+                    <div class="grid-demo info">col-4</div>
+                </div>
+                <div class="col-8">
+                    <div class="grid-demo warning">col-8</div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="grid-demo danger">col-6</div>
+                </div>
+                <div class="col-6">
+                    <div class="grid-demo primary">col-6</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Responsive Grid Layout -->
+        <div class="section-header">
+            <h2><i class="fas fa-mobile-alt"></i> Responsive Grid Layout</h2>
+            <p>Adaptive layouts that change based on screen size</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <h4 class="mb-3">Mobile-First Responsive Design</h4>
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="grid-demo primary responsive-demo">
+                        <div>
+                            <i class="fas fa-mobile-alt d-block mb-2"></i>
+                            XS: 12 cols<br>
+                            MD: 6 cols<br>
+                            LG: 4 cols
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="grid-demo secondary responsive-demo">
+                        <div>
+                            <i class="fas fa-tablet-alt d-block mb-2"></i>
+                            XS: 12 cols<br>
+                            MD: 6 cols<br>
+                            LG: 4 cols
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-4">
+                    <div class="grid-demo success responsive-demo">
+                        <div>
+                            <i class="fas fa-desktop d-block mb-2"></i>
+                            XS: 12 cols<br>
+                            MD: 12 cols<br>
+                            LG: 4 cols
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-display mt-3">
+                <span class="comment"><!-- Responsive columns --></span><br>
+                &lt;<span class="tag">div</span> <span class="class">class</span>="row"&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col-12 col-md-6 col-lg-4"&gt;Content&lt;/<span class="tag">div</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col-12 col-md-6 col-lg-4"&gt;Content&lt;/<span class="tag">div</span>&gt;<br>
+                &nbsp;&nbsp;&lt;<span class="tag">div</span> <span class="class">class</span>="col-12 col-md-12 col-lg-4"&gt;Content&lt;/<span class="tag">div</span>&gt;<br>
+                &lt;/<span class="tag">div</span>&gt;
+            </div>
+        </div>
+
+        <!-- Complex Layout Example -->
+        <div class="section-header">
+            <h2><i class="fas fa-layer-group"></i> Complex Layout Example</h2>
+            <p>Real-world layout patterns using Bootstrap grid</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <!-- Header Row -->
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="grid-demo primary">
+                        <i class="fas fa-bars"></i> Header (col-12)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Row -->
+            <div class="row mb-3">
+                <!-- Sidebar -->
+                <div class="col-12 col-md-3">
+                    <div class="grid-demo info">
+                        <i class="fas fa-sidebar"></i> Sidebar<br>
+                        <small>col-12 col-md-3</small>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-12 col-md-9">
+                    <div class="grid-demo warning">
+                        <i class="fas fa-newspaper"></i> Main Content<br>
+                        <small>col-12 col-md-9</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Three Column Feature Row -->
+            <div class="row mb-3">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="grid-demo success feature-card">
+                        <i class="fas fa-cog d-block mb-2"></i>
+                        Feature 1<br>
+                        <small>col-12 col-sm-6 col-lg-4</small>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="grid-demo danger feature-card">
+                        <i class="fas fa-chart-bar d-block mb-2"></i>
+                        Feature 2<br>
+                        <small>col-12 col-sm-6 col-lg-4</small>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-4">
+                    <div class="grid-demo secondary feature-card">
+                        <i class="fas fa-users d-block mb-2"></i>
+                        Feature 3<br>
+                        <small>col-12 col-sm-12 col-lg-4</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Row -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="grid-demo primary">
+                        <i class="fas fa-copyright"></i> Footer (col-12)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nested Grids -->
+        <div class="section-header">
+            <h2><i class="fas fa-sitemap"></i> Nested Grids</h2>
+            <p>Grids within grids for complex layouts</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <div class="row">
+                <div class="col-12 col-lg-8">
+                    <div class="grid-demo primary">
+                        <strong>Main Content Area (col-12 col-lg-8)</strong>
+                        <div class="nested-demo mt-3">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="grid-demo success">Nested col-6</div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="grid-demo info">Nested col-6</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-4">
+                                    <div class="grid-demo warning">col-4</div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="grid-demo danger">col-8</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <div class="grid-demo secondary">
+                        <strong>Sidebar (col-12 col-lg-4)</strong>
+                        <div class="nested-demo mt-3">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="grid-demo info">Widget 1</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <div class="grid-demo success">Widget 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Utilities -->
+        <div class="section-header">
+            <h2><i class="fas fa-tools"></i> Grid Utilities & Alignment</h2>
+            <p>Advanced grid features and alignment options</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <h4 class="mb-3">Vertical Alignment</h4>
+            <div class="row align-items-center" style="height: 120px;">
+                <div class="col-4">
+                    <div class="grid-demo primary">align-items-center</div>
+                </div>
+                <div class="col-4">
+                    <div class="grid-demo secondary">Centered</div>
+                </div>
+                <div class="col-4">
+                    <div class="grid-demo success">Content</div>
+                </div>
+            </div>
+
+            <h4 class="mb-3 mt-4">Horizontal Alignment</h4>
+            <div class="row justify-content-center">
+                <div class="col-3">
+                    <div class="grid-demo info">Centered</div>
+                </div>
+                <div class="col-3">
+                    <div class="grid-demo warning">Columns</div>
+                </div>
+            </div>
+
+            <h4 class="mb-3 mt-4">Column Ordering</h4>
+            <div class="row">
+                <div class="col-12 col-md-4 order-3 order-md-1">
+                    <div class="grid-demo primary">First on desktop</div>
+                </div>
+                <div class="col-12 col-md-4 order-1 order-md-2">
+                    <div class="grid-demo secondary">Second on desktop</div>
+                </div>
+                <div class="col-12 col-md-4 order-2 order-md-3">
+                    <div class="grid-demo success">Third on desktop</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Breakpoints Info -->
+        <div class="section-header">
+            <h2><i class="fas fa-rulers"></i> Bootstrap Breakpoints</h2>
+            <p>Understanding responsive breakpoints and grid behavior</p>
+        </div>
+
+        <div class="glass-card p-4 mb-4">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Breakpoint</th>
+                            <th>Class Infix</th>
+                            <th>Dimensions</th>
+                            <th>Container Max Width</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Extra Small</strong></td>
+                            <td><code>None</code></td>
+                            <td>&lt;576px</td>
+                            <td>None (auto)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Small</strong></td>
+                            <td><code>sm</code></td>
+                            <td>≥576px</td>
+                            <td>540px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Medium</strong></td>
+                            <td><code>md</code></td>
+                            <td>≥768px</td>
+                            <td>720px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Large</strong></td>
+                            <td><code>lg</code></td>
+                            <td>≥992px</td>
+                            <td>960px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Extra Large</strong></td>
+                            <td><code>xl</code></td>
+                            <td>≥1200px</td>
+                            <td>1140px</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Extra Extra Large</strong></td>
+                            <td><code>xxl</code></td>
+                            <td>≥1400px</td>
+                            <td>1320px</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Framework Information -->
+        <div class="section-header">
+            <h2><i class="fas fa-info-circle"></i> About Bootstrap Grid System</h2>
+            <p>Learn more about Bootstrap's powerful grid framework</p>
+        </div>
+
+        <div class="glass-card p-4 mb-5">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4><i class="fas fa-check-circle text-success"></i> Key Features</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-star text-warning"></i> <strong>12-Column System:</strong> Flexible grid based on 12 columns</li>
+                        <li><i class="fas fa-star text-warning"></i> <strong>Responsive:</strong> Mobile-first responsive design</li>
+                        <li><i class="fas fa-star text-warning"></i> <strong>Flexbox:</strong> Built on CSS Flexbox for better alignment</li>
+                        <li><i class="fas fa-star text-warning"></i> <strong>Nested Grids:</strong> Grids can be nested within columns</li>
+                        <li><i class="fas fa-star text-warning"></i> <strong>Utility Classes:</strong> Extensive utility classes for spacing, alignment</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4><i class="fas fa-lightbulb text-primary"></i> Best Practices</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-arrow-right text-primary"></i> Always use <code>.row</code> to wrap <code>.col</code> elements</li>
+                        <li><i class="fas fa-arrow-right text-primary"></i> Columns should be immediate children of rows</li>
+                        <li><i class="fas fa-arrow-right text-primary"></i> Use responsive breakpoint classes for different devices</li>
+                        <li><i class="fas fa-arrow-right text-primary"></i> Keep mobile-first approach in mind</li>
+                        <li><i class="fas fa-arrow-right text-primary"></i> Test across different screen sizes</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Update breakpoint indicator
+        function updateBreakpointIndicator() {
+            const width = window.innerWidth;
+            const indicator = document.getElementById('breakpoint');
+            
+            if (width < 576) {
+                indicator.textContent = 'XS';
+            } else if (width < 768) {
+                indicator.textContent = 'SM';
+            } else if (width < 992) {
+                indicator.textContent = 'MD';
+            } else if (width < 1200) {
+                indicator.textContent = 'LG';
+            } else if (width < 1400) {
+                indicator.textContent = 'XL';
+            } else {
+                indicator.textContent = 'XXL';
+            }
+        }
+
+        // Add fade-in animation to cards
+        function animateCards() {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Add interactive effects to grid demos
+        function addGridInteractivity() {
+            const gridDemos = document.querySelectorAll('.grid-demo');
+            gridDemos.forEach(demo => {
+                demo.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            updateBreakpointIndicator();
+            animateCards();
+            addGridInteractivity();
+        });
+
+        // Update breakpoint on resize
+        window.addEventListener('resize', updateBreakpointIndicator);
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
