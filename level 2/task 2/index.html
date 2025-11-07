@@ -3,29 +3,114 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Level 2 — Task 2 | Placeholder</title>
+  <title>Level 2 — Task 2 | Responsive Design & Mobile Nav (CSS Only)</title>
+  <meta name="description" content="Convert a basic webpage into a responsive design using CSS media queries and build a CSS-only hamburger menu that collapses on small screens." />
   <link rel="stylesheet" href="styles.css" />
-  <meta name="description" content="Level 2 Task 2 placeholder page. Content coming soon." />
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <div class="logo" aria-hidden="true">⌁</div>
-      <div class="meta">
-        <h1>Level 2 — Task 2</h1>
-        <p class="tagline">This page is a placeholder so links display correctly. Content coming soon.</p>
-      </div>
-    </header>
+  <a class="skip-link" href="#content">Skip to content</a>
 
-    <section class="panel">
-      <h2>What’s this?</h2>
-      <p>We haven’t added the official Task 2 content yet. This placeholder ensures GitHub Pages doesn’t 404.</p>
-      <p>When ready, replace this file with your actual Task 2 implementation.</p>
-      <div class="actions">
-        <a class="btn" href="/">Back to Site Home</a>
-        <a class="btn" href="https://github.com/karkra911/cognify-web-development-internship">View on GitHub</a>
+  <!-- Header with CSS-only Hamburger Menu -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="brand">
+        <span class="logo" aria-hidden="true">⌁</span>
+        <span class="brand-text">
+          <strong>Cognifyz</strong>
+          <small>Where Data Meets Intelligence</small>
+        </span>
+      </a>
+
+      <!-- Hamburger (checkbox hack, no JS) -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open navigation" />
+      <label for="nav-toggle" class="hamburger" aria-hidden="true" title="Menu" tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </label>
+
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="../../level%201/task%201/master-hub.html">Level 1</a></li>
+          <li><a href="../task%201/master-all-in-one.html">Level 2 · Task 1</a></li>
+          <li><a href="https://github.com/karkra911/cognify-web-development-internship">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <!-- Hero -->
+    <section class="hero container">
+      <div class="hero-text">
+        <h1>Responsive Design — Level 2 · Task 2</h1>
+        <p class="lead">Responsive layout with CSS media queries and a mobile‑friendly hamburger menu built with HTML + CSS only.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#features">See Features</a>
+          <a class="btn" href="#layout">View Layout</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="gridlines"></div>
+      </div>
+    </section>
+
+    <!-- Overview / Features -->
+    <section id="features" class="section container">
+      <h2>What’s included</h2>
+      <p class="section-lead">A basic webpage, made responsive, with a CSS-only collapsing navigation.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>CSS Media Queries</h3>
+          <p>Layout adapts across breakpoints (desktop, tablet, mobile) — grid becomes a single column on narrow screens.</p>
+        </article>
+        <article class="card">
+          <h3>Hamburger Menu</h3>
+          <p>Navigation collapses into a hamburger icon using the checkbox technique — no JavaScript needed.</p>
+        </article>
+        <article class="card">
+          <h3>Accessible Defaults</h3>
+          <p>Skip link, focus states, and high‑contrast theme. Menu can be toggled via keyboard focus on the label.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Sample Responsive Layout -->
+    <section id="layout" class="section container">
+      <h2>Responsive Layout Example</h2>
+      <p class="section-lead">Resize the window to see the grid adapt.</p>
+      <div class="grid">
+        <article class="tile">
+          <h4>Card One</h4>
+          <p>Content area demonstrating how items wrap and reflow responsively.</p>
+        </article>
+        <article class="tile">
+          <h4>Card Two</h4>
+          <p>Uses fluid width, with spacing managed by CSS variables and media queries.</p>
+        </article>
+        <article class="tile">
+          <h4>Card Three</h4>
+          <p>On small screens, tiles stack vertically for comfortable reading.</p>
+        </article>
+        <article class="tile">
+          <h4>Card Four</h4>
+          <p>On wide screens, tiles show in multiple columns for efficient scanning.</p>
+        </article>
       </div>
     </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2025 Cognifyz — Where Data Meets Intelligence</div>
+      <div class="footer-links">
+        <a href="/">Back to Home</a>
+        <a href="https://github.com/karkra911/cognify-web-development-internship">GitHub</a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
