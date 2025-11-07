@@ -50,6 +50,13 @@ a{color:var(--ink)}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:12px}
 .tile{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--shadow)}
 
+/* Images demo */
+.img-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.img-card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.img-card img{display:block;width:100%;height:auto}
+.img-card figcaption{padding:10px 12px;color:var(--ink-dim)}
+.img-card:hover{outline:2px solid color-mix(in lab, var(--brand) 50%, white)}
+
 /* Footer */
 .site-footer{margin-top:36px;border-top:1px solid var(--border)}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 0;color:var(--ink-dim)}
@@ -60,6 +67,7 @@ a{color:var(--ink)}
 	.hero{grid-template-columns:1fr}
 	.hero-art{height:220px}
 	.grid{grid-template-columns:repeat(3,1fr)}
+	.img-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media (max-width: 840px){
@@ -76,10 +84,12 @@ a{color:var(--ink)}
 	.nav-toggle:checked ~ .nav .nav-links{max-height:300px}
 
 	.grid{grid-template-columns:repeat(2,1fr)}
+		.img-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 @media (max-width: 560px){
 	.grid{grid-template-columns:1fr}
+		.img-grid{grid-template-columns:1fr}
 }
 
 /* Reduced motion */

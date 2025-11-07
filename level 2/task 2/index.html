@@ -101,6 +101,38 @@
         </article>
       </div>
     </section>
+
+    <!-- Responsive Images Demo -->
+    <section id="images" class="section container">
+      <h2>Responsive Images</h2>
+      <p class="section-lead">Images use <code>&lt;picture&gt;</code> with <code>srcset</code> and <code>sizes</code> to serve the right resolution per device.</p>
+      <div class="img-grid">
+        <figure class="img-card">
+          <picture>
+            <source type="image/jpeg" srcset="https://picsum.photos/id/1018/800/600 800w, https://picsum.photos/id/1018/1200/900 1200w" sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            <img loading="lazy" src="https://picsum.photos/id/1018/800/600" alt="Aerial coastline view" width="800" height="600" />
+          </picture>
+          <figcaption>Aerial coastline</figcaption>
+        </figure>
+
+        <figure class="img-card">
+          <picture>
+            <source type="image/jpeg" srcset="https://picsum.photos/id/1039/800/600 800w, https://picsum.photos/id/1039/1200/900 1200w" sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            <img loading="lazy" src="https://picsum.photos/id/1039/800/600" alt="Sunset over hills" width="800" height="600" />
+          </picture>
+          <figcaption>Sunset over hills</figcaption>
+        </figure>
+
+        <figure class="img-card">
+          <picture>
+            <source type="image/jpeg" srcset="https://picsum.photos/id/1047/800/600 800w, https://picsum.photos/id/1047/1200/900 1200w" sizes="(max-width: 560px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+            <img loading="lazy" src="https://picsum.photos/id/1047/800/600" alt="Mountain horizon" width="800" height="600" />
+          </picture>
+          <figcaption>Mountain horizon</figcaption>
+        </figure>
+      </div>
+      <p class="hint">Replace these external placeholders with your own images by updating the <code>srcset</code> URLs. Keep width/height for stable layout.</p>
+    </section>
   </main>
 
   <footer class="site-footer">
