@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cognifyz Web Development Internship — Portfolio</title>
+  <meta name="description" content="Portfolio of internship tasks across Levels 1–3, including CSS gallery, slideshow, and internship landing page." />
+  <style>
+    :root{--bg:#0b1020;--panel:#121938;--ink:#e9eefb;--ink-dim:#bec7e8;--brand:#5b8cff;--accent:#34d399;--border:rgba(255,255,255,.10)}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,Noto Sans;line-height:1.5;color:var(--ink);background:radial-gradient(1200px 700px at 10% -10%,#1c2550 0%,transparent 60%),radial-gradient(1400px 800px at 110% 10%,#152147 0%,transparent 60%),var(--bg)}
+    .container{width:min(1100px,92vw);margin:40px auto}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--accent));display:grid;place-items:center;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    h1{margin:0;background:linear-gradient(90deg,#c7d2fe,#60a5fa,#34d399);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:14px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    .card h2{margin:8px 0 6px}
+    .card p{margin:0;color:var(--ink-dim)}
+    .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;border:1px solid var(--border);text-decoration:none;color:var(--ink);background:#0d132a}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#4e74f6);color:#fff}
+    footer{margin-top:32px;color:var(--ink-dim);border-top:1px solid var(--border);padding-top:16px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">⌁</div>
+        <div>
+          <h1>Cognifyz — Where Data Meets Intelligence</h1>
+          <div style="color:var(--ink-dim);font-size:.95rem">Web Development Internship Portfolio</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a class="btn" href="https://github.com/karkra911/cognify-web-development-internship">View on GitHub</a>
+      </nav>
+    </header>
+
+    <section class="grid">
+      <article class="card">
+        <h2>Level 1</h2>
+        <p>HTML/CSS and JavaScript projects with master hubs.</p>
+        <div class="links">
+          <a class="btn" href="level%201/task%201/master-hub.html">Task 1: Master Hub</a>
+          <a class="btn" href="level%201/task%202/master-all-in-one.html">Task 2: All-in-One</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Level 2</h2>
+        <p>Framework demos: Bulma Cards and Bootstrap Grid.</p>
+        <div class="links">
+          <a class="btn" href="level%202/task%201/master-all-in-one.html">Task 1: Unified Demo</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Level 3 — Task 1</h2>
+        <p>CSS Image Gallery and Auto Slideshow (no JavaScript).</p>
+        <div class="links">
+          <a class="btn primary" href="level%203/task%201/index.html">Open Gallery & Slideshow</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>Level 3 — Task 2</h2>
+        <p>Web Developer Internship Landing Page.</p>
+        <div class="links">
+          <a class="btn primary" href="level%203/task%202/index.html">Open Landing Page</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      © 2025 Cognifyz — Where Data Meets Intelligence
+    </footer>
+  </div>
+</body>
+</html>
