@@ -1,0 +1,12 @@
+# OS files
+Thumbs.db
+.DS_Store
+
+# VS Code settings (optional keep if you want to share)
+.vscode/
+
+# Logs
+*.log
+
+# Misc
+*.zip

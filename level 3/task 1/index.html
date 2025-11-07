@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Level 3 — Task 1 | Image Manipulation (CSS Only)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!--
+    How to customize images:
+    - Replace the image src URLs with your own local files (e.g., assets/img1.jpg)
+    - For best results, keep a small thumbnail (~300x200) and a larger version (~1200x800)
+    - Add/remove gallery items by duplicating a thumbnail link and a matching lightbox block below
+  -->
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Cognifyz — Where Data Meets Intelligence</h1>
+      <p>Level 3 · Image Manipulation · Task 1</p>
+      <nav class="top-nav">
+        <a href="#gallery">Gallery</a>
+        <a href="#slideshow">Slideshow</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ========================================= -->
+    <!-- 1) CSS Image Gallery with Click-to-Enlarge -->
+    <!-- ========================================= -->
+    <section id="gallery" class="section">
+      <h2>CSS Image Gallery (Click a thumbnail to enlarge)</h2>
+      <p class="section-lead">Pure CSS lightbox using the :target selector — no JavaScript required.</p>
+
+      <div class="gallery" aria-label="Image gallery">
+        <!-- Thumbnails link to matching lightbox IDs below -->
+        <a class="thumb" href="#img1">
+          <img src="https://picsum.photos/id/1015/320/220" alt="Mountain lake at dawn" />
+        </a>
+        <a class="thumb" href="#img2">
+          <img src="https://picsum.photos/id/1025/320/220" alt="Puppy portrait" />
+        </a>
+        <a class="thumb" href="#img3">
+          <img src="https://picsum.photos/id/1035/320/220" alt="Pine forest from above" />
+        </a>
+        <a class="thumb" href="#img4">
+          <img src="https://picsum.photos/id/1043/320/220" alt="Desert road" />
+        </a>
+        <a class="thumb" href="#img5">
+          <img src="https://picsum.photos/id/1050/320/220" alt="Ocean waves" />
+        </a>
+        <a class="thumb" href="#img6">
+          <img src="https://picsum.photos/id/1062/320/220" alt="City skyline at dusk" />
+        </a>
+        <a class="thumb" href="#img7">
+          <img src="https://picsum.photos/id/1074/320/220" alt="Snowy mountains" />
+        </a>
+        <a class="thumb" href="#img8">
+          <img src="https://picsum.photos/id/1084/320/220" alt="Forest trail in autumn" />
+        </a>
+      </div>
+
+      <!-- Lightbox overlays (CSS :target) -->
+      <!-- Each block corresponds to one thumbnail above -->
+      <div class="lightbox" id="img1" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1015/1400/900" alt="Mountain lake at dawn" />
+          <figcaption>Mountain lake at dawn</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img8" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img2" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img2" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1025/1400/900" alt="Puppy portrait" />
+          <figcaption>Puppy portrait</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img1" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img3" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img3" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1035/1400/900" alt="Pine forest from above" />
+          <figcaption>Pine forest from above</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img2" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img4" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img4" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1043/1400/900" alt="Desert road" />
+          <figcaption>Desert road</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img3" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img5" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img5" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1050/1400/900" alt="Ocean waves" />
+          <figcaption>Ocean waves</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img4" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img6" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img6" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1062/1400/900" alt="City skyline at dusk" />
+          <figcaption>City skyline at dusk</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img5" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img7" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img7" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1074/1400/900" alt="Snowy mountains" />
+          <figcaption>Snowy mountains</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img6" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img8" aria-label="Next image">›</a>
+      </div>
+
+      <div class="lightbox" id="img8" aria-modal="true" role="dialog">
+        <a class="lightbox__close" href="#gallery" aria-label="Close"></a>
+        <figure>
+          <img src="https://picsum.photos/id/1084/1400/900" alt="Forest trail in autumn" />
+          <figcaption>Forest trail in autumn</figcaption>
+        </figure>
+        <a class="lightbox__prev" href="#img7" aria-label="Previous image">‹</a>
+        <a class="lightbox__next" href="#img1" aria-label="Next image">›</a>
+      </div>
+    </section>
+
+    <!-- ====================================== -->
+    <!-- 2) Pure CSS Slideshow (Auto transition) -->
+    <!-- ====================================== -->
+    <section id="slideshow" class="section">
+      <h2>Pure CSS Slideshow (Auto)</h2>
+      <p class="section-lead">A simple cross-fade carousel using CSS animations. No JavaScript.</p>
+
+      <div class="slideshow" aria-roledescription="carousel" aria-label="Auto-advancing slideshow">
+        <img class="slide" src="https://picsum.photos/id/1018/1200/600" alt="Aerial coast" />
+        <img class="slide" src="https://picsum.photos/id/1020/1200/600" alt="Bridge in fog" />
+        <img class="slide" src="https://picsum.photos/id/1024/1200/600" alt="Close-up of a dog" />
+        <img class="slide" src="https://picsum.photos/id/1031/1200/600" alt="Misty forest" />
+        <img class="slide" src="https://picsum.photos/id/1039/1200/600" alt="Sunset over hills" />
+        <img class="slide" src="https://picsum.photos/id/1047/1200/600" alt="Mountain horizon" />
+      </div>
+      <p class="hint">Tip: Reduce motion in your OS/browser to pause automatic transitions (respects prefers-reduced-motion).</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Cognifyz — Where Data Meets Intelligence</p>
+    </div>
+  </footer>
+
+  <!-- No JavaScript required for this task. -->
+</body>
+</html>
